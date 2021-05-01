@@ -1,0 +1,22 @@
+Install Appium Command Line - Ref - https://www.techaheadcorp.com/blog/how-to-install-appium-on-mac/
+    brew install npm
+    npm install carthage 
+    npm install -g appium
+    npm install appium-doctor -g
+    Sudo gem install xcpretty
+    brew install libimobiledevice –HEAD
+    npm install -g ios-deploy
+
+Set ANDROID_HOME and JAVA_HOME
+
+Get List of all packages from device
+    adb shell pm list packages | grep chrome
+
+Get path from package file
+    adb shell pm path com.android.chrome
+
+Pull APK from device
+    adb pull /data/app/com.android.chrome-fUINtz4zbfSoo0x70JzTfw==/base.apk
+
+Extract Main activity or Launcher activity from APK file
+    aapt dump xmltree base.apk AndroidManifest.xml | grep Main

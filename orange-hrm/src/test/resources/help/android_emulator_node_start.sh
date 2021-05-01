@@ -1,0 +1,1 @@
+appium -p 4001 --nodeconfig android_mi2_node_config.json --bootstrap-port 5001 --default-capabilities '{"udid": "emulator-5554"}'

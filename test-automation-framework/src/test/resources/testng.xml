@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Selenium-Cucumber-Test" parallel="methods" thread-count="10" >
+
+<!-- parameter name="featureFilePath" value="src/test/resources/feature/Login.feature"/ --> <!--  Mandatory : Run specific feature file -->
+<parameter name="featureFilePath" value="src/test/resources/feature/"/> <!--  Mandatory : Folder of feature file -->
+<parameter name="glueCodePackageName" value="com.orangehrm.pages"/> <!--  Mandatory : Folder of feature file -->
+<parameter name="tagsToExecute" value="@High or @SanityTest"/>   
+<!-- Mandatory value can be {
+								<parameter name="tagsToExecute" value=""> //ignore tags
+								<parameter name="tagsToExecute" value="@High or @SanityTest">
+								<parameter name="tagsToExecute" value="@High and @SanityTest">
+								<parameter name="tagsToExecute" value="@High">
+							} 
+-->
+
+  <test name="Test">
+    <classes>
+      <class name="com.test.runner.ParallelTestRunner"/>  <!--  Mandatory : Test Runner file
+      	For Sequential Run - user com.test.runner.SequentialTestRunner
+      	For Parallel Run com.test.runner.ParallelTestRunner
+       -->
+    </classes>
+  </test>
+</suite> 
