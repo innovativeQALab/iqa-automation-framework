@@ -33,7 +33,7 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.iqa</groupId>
+			<groupId>io.github.innovativeqalab</groupId>
 			<artifactId>test-automation-framework</artifactId>
 			<version>0.0.1</version>
 		</dependency>
