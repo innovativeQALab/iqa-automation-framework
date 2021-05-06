@@ -75,4 +75,11 @@
 		<configuration> Suite testng xml file to consider for test execution <suiteXmlFiles> 
 		<suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile> </suiteXmlFiles> 
 		</configuration> </plugin> </plugins> </build> -->
+	<distributionManagement>
+		<repository>
+		  <id>ossrh</id>
+		  <name>Central Repository OSSRH</name>
+		  <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+  </distributionManagement>
 </project>
