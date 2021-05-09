@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.orangehrm</groupId>
 	<artifactId>orange-hrm</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 
 	<properties>
 		<maven.compiler.target>1.8</maven.compiler.target>
@@ -33,9 +33,9 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.iqa</groupId>
+			<groupId>io.github.innovativeqalab</groupId>
 			<artifactId>test-automation-framework</artifactId>
-			<version>0.0.1</version>
+			<version>0.0.2</version>
 		</dependency>
 	</dependencies>
 
