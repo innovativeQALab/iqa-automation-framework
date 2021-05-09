@@ -4,8 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.innovativeqalab</groupId>
 	<artifactId>test-automation-framework</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 	<packaging>jar</packaging>
+	<name>test-automation-framework</name>
+	<description>Functional Test Automation Framework</description>
+	<url>https://github.com/innovativeQALab/iqa-automation-framework</url>
 	<properties>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
@@ -31,13 +34,11 @@
 			<artifactId>cucumber-testng</artifactId>
 			<version>5.6.0</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.apache.directory.studio</groupId>
 			<artifactId>org.apache.commons.io</artifactId>
 			<version>2.4</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.freemarker</groupId>
 			<artifactId>freemarker</artifactId>
@@ -48,25 +49,15 @@
 			<artifactId>mongo-java-driver</artifactId>
 			<version>3.12.3</version>
 		</dependency>
-		<!-- dependency>
+		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.7.30</version>
-		</dependency> -->
+		</dependency>
 		<dependency>
 			<groupId>io.appium</groupId>
 			<artifactId>java-client</artifactId>
 			<version>7.2.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>1.18.10</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-slf4j-impl</artifactId>
-			<version>2.13.0</version>
 		</dependency>
 	</dependencies>
 	<!-- <build> Source directory configuration <sourceDirectory>src</sourceDirectory> 
@@ -76,10 +67,101 @@
 		<suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile> </suiteXmlFiles> 
 		</configuration> </plugin> </plugins> </build> -->
 	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
 		<repository>
-		  <id>ossrh</id>
-		  <name>Central Repository OSSRH</name>
-		  <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+			<id>ossrh</id>
+			<url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 		</repository>
-  </distributionManagement>
+	</distributionManagement>
+	<scm>
+		<connection>scm:git:git://github.com/innovativeQALab/iqa-automation-framework.git</connection>
+		<developerConnection>scm:git:git@github.com:innovativeQALab/innovativeQALab.git</developerConnection>
+		<url>https://github.com/innovativeQALab/iqa-automation-framework</url>
+		<tag>HEAD</tag>
+	</scm>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>1.6.7</version>
+				<extensions>true</extensions>
+				<configuration>
+					<serverId>ossrh</serverId>
+					<nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+					<autoReleaseAfterClose>true</autoReleaseAfterClose>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.5.3</version>
+				<configuration>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
+					<useReleaseProfile>false</useReleaseProfile>
+					<releaseProfiles>release</releaseProfiles>
+					<goals>deploy</goals>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.2.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.10.4</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+					<additionalparam>-Xdoclint:none</additionalparam>
+				</configuration>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<licenses>
+		<license>
+			<name>The Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+	<developers>
+		<developer>
+			<id>innovativeQALab</id>
+			<name>innovativeQALab</name>
+			<email>innovativeqalab@gmail.com</email>
+		</developer>
+	</developers>
 </project>
