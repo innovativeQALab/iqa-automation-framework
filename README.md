@@ -94,10 +94,10 @@ Example:
 1) Provide all web element at the start of each page class 
     1) **@FindBy** - tag used for web/windows application web element
     2) **AndroidFindy** tag used for Android application web element
-2) Create a method for all **GIVEN** keyword of **feature file** with tag **Given** in corresponding page
-3) Create a method for all **WHEN** keyword of **feature file** with tag **When** in corresponding page
-4) Create a method for all **THEN** keyword of **feature file** with tag **Then** in corresponding pagesssss
-5) Use Assertions for validation of actual and expected results
+2) Create a method for all **GIVEN** keyword of **feature file** with tag **Given** in respective page
+3) Create a method for all **WHEN** keyword of **feature file** with tag **When** in respective page
+4) Create a method for all **THEN** keyword of **feature file** with tag **Then** in respective pagesssss
+5) Use Assertions for validation purpose to compare actual and expected results
       
    
  
