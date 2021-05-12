@@ -33,6 +33,7 @@ Dependency:
 4) Create feature file and corresponding step definitions in it
 5) Create testNG.xml file
 6) Create required configuration files in resources folder
+
 ```Please refer sample project "orange-hrm" for more details```
 
 ### XML file configurations
