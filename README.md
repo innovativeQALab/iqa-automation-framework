@@ -4,7 +4,7 @@
 ###### iqa-automation-framework is evolved from [cucumber-selenium-framework](https://github.com/zodgevaibhav/cucumber-selenium-framework)
 ### Features
 1) With few Configurations and adding dependencies, you are ready to use this framework
-2) Framework support: Testing web application, Mobile application (Native, Web, Hybrid), Windows Native applications
+2) Framework supports to test web application, Mobile application (Native, Web, Hybrid), Windows Native applications
 3) BDD based Framework:
     1) Tag based scenarios
     2) Tag based execution
@@ -47,14 +47,15 @@ TestNG xml file gives facility to execute test scripts as per our requirement. W
 ```
 3) Provide Glue code package name where page object classes are created:
 ```xml
-<parameter name="featureFilePath" value="src/test/resources/feature/"/>
+<parameter name="glueCodePackageName" value="com.orangehrm.pages.web"/>
 ```
 4) Tag based execution - Provide the tag  which need to include in execution:
 ```xml
-<parameter name="featureFilePath" value="src/test/resources/feature/"/>
+<parameter name="tagsToExecute" value="@High"/> 
 ```
 5) Select runner class Name to run test scripts **parallel** or  **sequential** :
-    1) Parallel Execution
+
+	1) Parallel Execution
 ```xml
  <class name="org.iqa.test.runner.ParallelTestRunner"/>
  ```
