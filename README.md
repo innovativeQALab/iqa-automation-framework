@@ -93,7 +93,7 @@ Example:
 ### How to write Page Object Classes
 1) Provide all web element at the start of each page class 
     1) **@FindBy** - tag used for web/windows application web element
-    2) **AndroidFindBy** tag used for Android application web element
+    2) **@AndroidFindBy** tag used for Android application web element
 2) Create a method for all **GIVEN** keyword of **feature file** with tag **Given** in respective page
 3) Create a method for all **WHEN** keyword of **feature file** with tag **When** in respective page
 4) Create a method for all **THEN** keyword of **feature file** with tag **Then** in respective page
