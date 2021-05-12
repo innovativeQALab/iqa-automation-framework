@@ -3,7 +3,7 @@
 
 ###### iqa-automation-framework is evolved from [cucumber-selenium-framework](https://github.com/zodgevaibhav/cucumber-selenium-framework)
 ### Features
-1) Do Configurations with addition of dependencies you are ready to use this framework
+1) With few Configurations and adding dependencies, you are ready to use this framework
 2) Framework support: Testing web application, Mobile application (Native, Web, Hybrid), Windows Native applications
 3) BDD based Framework:
     1) Tag based scenarios
@@ -35,7 +35,7 @@ Dependency:
 6) Create required configuration files in resources folder
 ```Please refer sample project "orange-hrm" for more details```
 
-# XML file configurations
+### XML file configurations
 TestNG xml file gives facility to execute test scripts as per our requirement. We need to provide the parameters which is mandatory for the execution of scripts and also as per our need
 1) Parallel execution threads control:
 ```xml
