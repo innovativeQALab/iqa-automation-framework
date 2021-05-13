@@ -5,7 +5,6 @@
 Selenium WebDriver and Appium based Web, Mobile (Android, iOS) and Windows desktop Automation Framework with BDD &amp; Non-BDD implementation support
 
 
-###### iqa-automation-framework is evolved from [cucumber-selenium-framework](https://github.com/zodgevaibhav/cucumber-selenium-framework)
 ### Features
 1) With few Configurations and adding dependencies, you are ready to use this framework
 2) Framework supports to test web application, Mobile application (Native, Web, Hybrid), Windows Native applications
