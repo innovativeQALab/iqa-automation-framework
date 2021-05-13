@@ -1,5 +1,9 @@
-# iqa-automation-framework
-##### _Selenium WebDriver and Appium based Web, Mobile (Android, iOS) and Windows desktop Automation Framework with BDD implementation support_ 
+# iqa-automation-framework 
+
+> Evaluted from [cucumber-selenium-framework](https://github.com/zodgevaibhav/cucumber-selenium-framework)
+
+Selenium WebDriver and Appium based Web, Mobile (Android, iOS) and Windows desktop Automation Framework with BDD &amp; Non-BDD implementation support
+
 
 ###### iqa-automation-framework is evolved from [cucumber-selenium-framework](https://github.com/zodgevaibhav/cucumber-selenium-framework)
 ### Features
@@ -100,6 +104,4 @@ Example:
 3) Create a method for all **WHEN** keyword of **feature file** with tag **When** in respective page
 4) Create a method for all **THEN** keyword of **feature file** with tag **Then** in respective page
 5) Use Assertions for validation purpose to compare actual and expected results
-      
-   
- 
+
