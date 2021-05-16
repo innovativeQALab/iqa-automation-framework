@@ -2,7 +2,7 @@
 
 > Evaluted from [cucumber-selenium-framework](https://github.com/zodgevaibhav/cucumber-selenium-framework)
 
-Selenium WebDriver and Appium based Web, Mobile (Android, iOS) and Windows desktop Automation Framework with BDD &amp; Non-BDD implementation support
+Selenium WebDriver and Appium based Web, Mobile (Android, iOS) and Windows desktop Automation Framework with BDD implementation support
 
 
 ### Features
@@ -26,9 +26,9 @@ Dependency:
 ```xml
 <dependencies>
 		<dependency>
-			<groupId>org.iqa</groupId>
+			<groupId>io.github.innovativeqalab</groupId>
 			<artifactId>test-automation-framework</artifactId>
-			<version>0.0.1</version>
+			<version>0.0.2</version>
 		</dependency>
 	</dependencies>
 ```
@@ -43,7 +43,7 @@ Dependency:
 TestNG xml file gives facility to execute test scripts as per our requirement. We need to provide the parameters which is mandatory for the execution of scripts and also as per our need
 1) Parallel execution threads control:
 ```xml
-<suite name="Selenium-Cucumber-Test" parallel="methods" thread-count="10" >    
+<suite name="Selenium-Cucumber-Test" parallel="methods" data-provider-thread-count="10" >    
 ```
 2) Provide Feature File/Folder Path:
 ```xml
