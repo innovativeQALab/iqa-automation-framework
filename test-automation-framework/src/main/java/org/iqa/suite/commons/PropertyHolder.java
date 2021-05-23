@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.iqa.suite.commons.applitool.ApplitoolEyes;
 import org.iqa.suite.commons.listeners.SeleniumMethodInvocationListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,8 @@ public class PropertyHolder {
 		testSuiteConfigurationProperties.load(input);
 	}
 
+
+	
 	public static void loadWebDriverConfig() {
 		testSuiteConfigurationProperties = new CustomProperties();
 
@@ -37,6 +40,25 @@ public class PropertyHolder {
 		}
 	}
 
+	public static void loadApplitoolConfig() {
+		if(null==testSuiteConfigurationProperties)
+			testSuiteConfigurationProperties = new CustomProperties();
+
+		try {
+			loadPropertyFile("src/test/resources/properties/framework/ApplitoolEyeConfig.properties");
+
+		} catch (IOException e) {
+			System.out.println(
+					"Applitool Config file not found. Please create config file if you want to use Applitool here.. src/test/resources/properties/framework/ApplitoolEyeConfig.properties");
+			logger.error(
+					"Applitool Config file not found. Please create config file if you want to use Applitool here.. src/test/resources/properties/framework/ApplitoolEyeConfig.properties");
+			//e.printStackTrace();
+			ApplitoolEyes.enabled=false;
+		
+		}
+	}
+	
+	
 	public static void loadGeneralConfig() {
 		File[] files = new File("src/test/resources/properties/userDefined").listFiles();
 		for (File file : files) {
