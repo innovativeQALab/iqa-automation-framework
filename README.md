@@ -32,12 +32,29 @@ Dependency:
 		</dependency>
 	</dependencies>
 ```
-3) Create page object classes  
-4) Create feature file and corresponding step definitions in it
-5) Create testNG.xml file
-6) Create required configuration files in resources folder
+3) Create page object classes src/test/java folder
+4) Create feature file/s in src/test/resources/feature folder and corresponding step definitions in src/test/java folder
+5) Create testNG.xml file in src/test/resources folder
+6) Create required configuration files in src/test/resources folder
+	1. WebDriverConfig.properties
+	2. Environment.properties
 
 ```Please refer sample project "orange-hrm" for more details```
+
+### Properties file configurations
+1) WebDriverConfig.properties is the important file which decides whether to run the tests locally or on remote machines. It contains following important items
+	- Driver mode : Remote or Local. Specify DRIVER=REMOTE for facilitating remote execution using remote driver. RemoteWebDriver capabilities must set in respective property files in src/test/resources/capabilities folder. DRIVER=BROWSER for execution on local machine.
+	- Platform : WINDOWS or LINUX or IOS or ANDROID ...
+	- Browser Name : Specify the browser you want to use
+	- Browser Version : Specify the browser version. If not specified, it will consider the default one.
+	- Driver Executables : Specify the complete path to driver exe. If Driver Mode is 'Remote', this property is not required.
+	- Driver Property Name : Specify property name of the driver e.g for chrome driver, 'web driver.chrome.driver'. If Driver Mode is 'Remote', this property is not required.
+	- Hub Url : This is required if the Driver Mode is Remote. Specify the selenium grid hub url or appium url as applicable
+
+2) Environment.properties file will have name of the environment. Corresponding to each environment e.g QA, there needs be properties file in the user-defined folder like 'QAEnvironmentConfig.properties'. This file will have environment URL and other environment specific properties.
+
+3) Capabilities : This folder will contain Browser, iOS, Android etc specific properties in the separate files as per our need. Please refer to sample project 'orange-hrm' for more details.
+
 
 ### XML file configurations
 TestNG xml file gives facility to execute test scripts as per our requirement. We need to provide the parameters which is mandatory for the execution of scripts and also as per our need
