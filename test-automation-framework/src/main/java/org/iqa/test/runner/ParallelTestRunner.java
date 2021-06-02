@@ -15,9 +15,9 @@ public class ParallelTestRunner extends BaseTest{
 	 {
 		 ExtentReportTestFactory.createNewTest(featureWrapper.toString(),pickleWrapper.toString());
 		 ExtentReportTestFactory.assignTestCategories(pickleWrapper.getPickle().getTags());
+		 openApplitoolEye( pickleWrapper,  featureWrapper);
 		 cucumberRunner.runScenario(pickleWrapper.getPickle());
 		 AssertionFactory.getSoftAssert().assertAll();
-
 	 }
 	
 }
