@@ -20,19 +20,6 @@ public class SequentialTestRunner extends BaseTest{
 		 openApplitoolEye( pickleWrapper,  featureWrapper);
 		 cucumberRunner.runScenario(pickleWrapper.getPickle());
 		 AssertionFactory.getSoftAssert().assertAll();
-		 closeApplitoolEye();
-	 }
-	 
-	 private void openApplitoolEye(PickleWrapper pickleWrapper, FeatureWrapper featureWrapper)
-	 {
-		 if(ApplitoolEyes.enabled==true)
-			 ApplitoolEyes.getEyes().open(WebDriverFactory.getDriver(),featureWrapper.toString(), pickleWrapper.toString());
-	 }
-	 
-	 private void closeApplitoolEye()
-	 {
-		 if(ApplitoolEyes.enabled==true)
-			 ApplitoolEyes.getEyes().close();
 	 }
 	
 }

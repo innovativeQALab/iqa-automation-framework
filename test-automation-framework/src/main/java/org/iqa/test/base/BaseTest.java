@@ -4,6 +4,7 @@ import org.iqa.suite.commons.PropertyHolder;
 import org.iqa.suite.commons.applitool.ApplitoolEyes;
 import org.iqa.suite.commons.listeners.SeleniumMethodInvocationListener;
 import org.iqa.suite.commons.reporting.ExtentReportTestFactory;
+import org.iqa.test.webdriver_factory.WebDriverFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterClass;
@@ -15,6 +16,8 @@ import org.testng.annotations.Parameters;
 
 import com.applitools.eyes.selenium.Eyes;
 
+import io.cucumber.testng.FeatureWrapper;
+import io.cucumber.testng.PickleWrapper;
 import io.cucumber.testng.TestNGCucumberRunner;
 
 @Listeners(SeleniumMethodInvocationListener.class)
@@ -80,5 +83,11 @@ public class BaseTest {
 			 ApplitoolEyes.setApplitoolCongfig(System.getenv("APPLITOOLS_API_KEY"),PropertyHolder.testSuiteConfigurationProperties.get("BATCH_NAME").toString());
 			 logger.info("Applitool configuration setup done...");
 		 }
+	 }
+	 
+	 protected void openApplitoolEye(PickleWrapper pickleWrapper, FeatureWrapper featureWrapper)
+	 {
+		 if(ApplitoolEyes.enabled==true)
+			 ApplitoolEyes.createEyes().open(WebDriverFactory.getDriver(),featureWrapper.toString(), pickleWrapper.toString());
 	 }
 }
