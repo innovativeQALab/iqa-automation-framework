@@ -5,6 +5,7 @@ import java.net.MalformedURLException;
 import java.util.HashMap;
 
 import org.iqa.suite.commons.SeleniumUtils;
+import org.iqa.suite.commons.TestMetaData;
 import org.iqa.suite.commons.applitool.ApplitoolEyes;
 import org.iqa.suite.commons.reporting.ExtentReportTestFactory;
 import org.iqa.test.test_data.RuntimeTestDataHolder;
@@ -28,6 +29,7 @@ public class SeleniumMethodInvocationListener implements IInvokedMethodListener 
 			try {
 				WebDriverFactory.setDriver(WebDriverManager.CreateInstance());
 				RuntimeTestDataHolder.setRunTimeTestData(new HashMap<String,String>());
+				TestMetaData.initialize();
 				logger.info("******** Driver object and test report instance created successfully");
 			} catch (MalformedURLException e) {
 				logger.error("!!!!!!!! Exception while creating Driver object and test report instance ");
@@ -57,8 +59,8 @@ public class SeleniumMethodInvocationListener implements IInvokedMethodListener 
 					e.printStackTrace();
 				}
 			}
-			closeApplitoolEye();
 			WebDriverFactory.getDriver().quit();
+			closeApplitoolEye();
 		}
 	}
 	
