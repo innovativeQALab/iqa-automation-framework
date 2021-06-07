@@ -1,6 +1,7 @@
 package org.iqa.test.runner;
 
 import org.iqa.suite.commons.AssertionFactory;
+import org.iqa.suite.commons.TestMetaData;
 import org.iqa.suite.commons.applitool.ApplitoolEyes;
 import org.iqa.suite.commons.reporting.ExtentReportTestFactory;
 import org.iqa.test.base.BaseTest;
@@ -17,6 +18,7 @@ public class SequentialTestRunner extends BaseTest{
 	 {
 		 ExtentReportTestFactory.createNewTest(featureWrapper.toString(),pickleWrapper.toString());
 		 ExtentReportTestFactory.assignTestCategories(pickleWrapper.getPickle().getTags());
+		 TestMetaData.setTestTags(pickleWrapper.getPickle().getTags());
 		 openApplitoolEye( pickleWrapper,  featureWrapper);
 		 cucumberRunner.runScenario(pickleWrapper.getPickle());
 		 AssertionFactory.getSoftAssert().assertAll();

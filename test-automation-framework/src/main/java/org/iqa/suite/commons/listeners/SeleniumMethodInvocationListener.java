@@ -57,8 +57,8 @@ public class SeleniumMethodInvocationListener implements IInvokedMethodListener 
 					e.printStackTrace();
 				}
 			}
-			closeApplitoolEye();
 			WebDriverFactory.getDriver().quit();
+			closeApplitoolEye();
 		}
 	}
 	
