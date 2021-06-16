@@ -6,9 +6,8 @@ import java.util.List;
 public class TestMetaData {
 
 	private static ThreadLocal<List<String>> testTags = new ThreadLocal<>();
-	
-	static
-	{
+
+	public static void initialize() {
 		testTags.set(new ArrayList<String>());
 	}
 
@@ -19,6 +18,5 @@ public class TestMetaData {
 	public static List<String> getTestTags() {
 		return new ArrayList<>(testTags.get()); //Immutable object return
 	}
-	
 	
 }
