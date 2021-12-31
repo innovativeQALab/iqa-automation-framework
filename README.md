@@ -11,13 +11,14 @@ Selenium WebDriver and Appium based Web, Mobile (Android, iOS) and Windows deskt
 3) BDD based Framework:
     1) Tag based scenarios
     2) Tag based execution
-4)  Parallel and Sequential execution support
+4) Parallel and Sequential execution support
 5) Selenium Grid Support: It helps in running multiple tests across different browsers, operating systems, and machines in parallel
 6) Database support- Do database Configuration and use it (MySQL, Oracle, etc.)
 7) Test Data management facility at run time, global, static, Test script level
 8) Logger and Reports Facility:
     1) Test method level - Using Extent Report
     2) Framework level - Using Log4j
+9) Applitool Eye Support
     
 ### How To Start/Use
 1) Create simple maven project in Eclipse
@@ -35,9 +36,13 @@ Dependency:
 3) Create page object classes src/test/java folder
 4) Create feature file/s in src/test/resources/feature folder and corresponding step definitions in src/test/java folder
 5) Create testNG.xml file in src/test/resources folder
-6) Create required configuration files in src/test/resources folder
-	1. WebDriverConfig.properties
-	2. Environment.properties
+6) Create required configuration files in src/test/resources folder (as a properties file).
+Configuration file are categorised in to three part
+	1. framework - Which are set/written by user but used by Framework for execution. These can be mandatory properties.
+		a. WebDriverConfig.properties - Configuration related to Selenium Grid, Platform, local execution, etc.
+		b. ApplitoolEyeConfig.properties - Configuration related to Applitool (Applitool Enable/Disable, Batch Name)
+	2. capabilities - capabilities for the selenium grid/appium/sauceLab. 
+	3. userDefined - General properties user want to use for any purpose ex. Global Test Data, Environment specific data, etc... 
 
 ```Please refer sample project "orange-hrm" for more details```
 
@@ -121,3 +126,7 @@ Example:
 4) Create a method for all **THEN** keyword of **feature file** with tag **Then** in respective page
 5) Use Assertions for validation purpose to compare actual and expected results
 
+### Applitool Integration
+1) Create Property file in src/test/resources/properties/framework/ApplitoolEyeConfig.properties
+2) Add properties as EYE_ENABLE=TRUE and BATCH_NAME=Regression Suite
+3) Set Applitool API Key in System Environmental variable with name "APPLITOOLS_API_KEY". Variable can be sent as TestNg Environmental parameter, Maven Parameter, Jenkins Parameter or can be set in Runner Machine.
