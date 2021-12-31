@@ -82,6 +82,7 @@ public class BaseTest {
 			 ApplitoolEyes.enabled=true;
 			 ApplitoolEyes.setApplitoolCongfig(System.getenv("APPLITOOLS_API_KEY"),PropertyHolder.testSuiteConfigurationProperties.get("BATCH_NAME").toString());
 			 logger.info("Applitool configuration setup done...");
+			 System.out.println("Applitool configuration setup done...");
 		 }
 	 }
 	 
