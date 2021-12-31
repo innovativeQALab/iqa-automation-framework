@@ -68,10 +68,7 @@ public class SeleniumMethodInvocationListener implements IInvokedMethodListener 
 		 {
 			 if(ApplitoolEyes.enabled==true && null!=ApplitoolEyes.getEyes() && ApplitoolEyes.getEyes().getIsOpen())
 			 {	 
-				 ApplitoolEyes.getEyes().close();
+					ApplitoolEyes.getEyes().closeAsync();
 			 }
 		 }
-
-	
-
 }
