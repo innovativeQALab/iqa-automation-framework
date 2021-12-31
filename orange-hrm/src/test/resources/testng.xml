@@ -3,8 +3,8 @@
 <suite name="Selenium-Cucumber-Test" parallel="methods" data-provider-thread-count="10" >
 
 <!-- parameter name="featureFilePath" value="src/test/resources/feature/Login.feature"/ --> <!--  Mandatory : Run specific feature file -->
-<parameter name="featureFilePath" value="src/test/resources/feature/"/> <!--  Mandatory : Folder of feature file -->
-<parameter name="glueCodePackageName" value="com.orangehrm.pages.web"/> <!--  Mandatory : Folder of feature file -->
+<parameter name="featureFilePath" value="src/test/resources/feature/Login.feature"/> <!--  Mandatory : Folder of feature file -->
+<parameter name="glueCodePackageName" value="com.orangehrm.step_def.web"/> <!--  Mandatory : Folder of feature file -->
 
 <parameter name="tagsToExecute" value="@High"/>   
 <!-- Mandatory value can be {
@@ -17,7 +17,7 @@
 
   <test name="Test">
     <classes>
-      <class name="org.iqa.test.runner.ParallelTestRunner"/>  <!--  Mandatory : Test Runner file
+      <class name="org.iqa.test.runner.SequentialTestRunner"/>  <!--  Mandatory : Test Runner file
       	For Sequential Run - user org.iqa.test.runner.SequentialTestRunner
       	For Parallel Run org.iqa.test.runner.ParallelTestRunner
        -->

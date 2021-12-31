@@ -1,6 +1,8 @@
 package com.orangehrm.pages.web;
 
 import org.iqa.suite.commons.PropertyHolder;
+import org.iqa.suite.commons.TestMetaData;
+import org.iqa.suite.commons.applitool.ApplitoolEyes;
 import org.iqa.test.base.BasePageBrowser;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -26,7 +28,6 @@ public class LoginPage extends BasePageBrowser{
 	
 	
 	
-	@Given("user navigate to orange hrm URL")
 	public LoginPage navigateToOrangeHrmApplication()
 	{
 		String ENVIRONMENT = PropertyHolder.testSuiteConfigurationProperties.getProperty("ENVIRONMENT");
@@ -45,13 +46,22 @@ public class LoginPage extends BasePageBrowser{
 		return this;
 	}
 	
-	@When("uses enters user name as {string} and password as {string} and click on login button")
 	public void loginForSuccess(String userName, String password)
 	{
 		logger.info("********** In verify welcome message method");
 		this.userName.sendKeys(userName);
 		this.password.sendKeys(password);
 		this.loginButton.click();
+	}
+
+	public LoginPage isPageLoaded() {
+		
+		if (TestMetaData.getTestTags().contains("@ScreenValidation") && ApplitoolEyes.enabled) {
+            ApplitoolEyes.getEyes().checkWindow("Login Page");
+        }
+		
+		return this;
+		
 	}
 
 }
