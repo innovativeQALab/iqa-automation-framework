@@ -77,7 +77,7 @@ public class WebDriverManager {
 
 	private static void loadDesiredData() {
 
-		if (null == System.getnv("browser")) {
+		if (null == System.getenv("browser")) {
 			loadConfigFromPropertyFile();
 		} else {
 			loadConfigFromSystemProperty();
