@@ -77,7 +77,7 @@ public class WebDriverManager {
 
 	private static void loadDesiredData() {
 
-		if (null == System.getProperty("browser")) {
+		if (null == System.getnv("browser")) {
 			loadConfigFromPropertyFile();
 		} else {
 			loadConfigFromSystemProperty();
@@ -86,8 +86,8 @@ public class WebDriverManager {
 	}
 
 	private static void loadConfigFromSystemProperty() {
-		platform = System.getProperty("platform");
-		hubUrl = System.getProperty("hubUrl");
+		platform = System.getenv("platform");
+		hubUrl = System.getenv("hubUrl");
 		driverMode = "REMOTE";
 	}
 
