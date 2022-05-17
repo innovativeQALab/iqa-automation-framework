@@ -1,5 +1,10 @@
 package org.iqa.suite.commons.applitool;
 
+import java.util.Collections;
+import java.util.Set;
+
+import org.iqa.suite.commons.PropertyHolder;
+import org.reflections.Reflections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -8,6 +13,8 @@ import com.applitools.eyes.EyesRunner;
 import com.applitools.eyes.config.Configuration;
 import com.applitools.eyes.selenium.ClassicRunner;
 import com.applitools.eyes.selenium.Eyes;
+import com.applitools.eyes.visualgrid.services.RunnerOptions;
+import com.applitools.eyes.visualgrid.services.VisualGridRunner;
 
 public class ApplitoolEyes {
 	
@@ -20,16 +27,30 @@ public class ApplitoolEyes {
 
 	
 	private static void createApplitoolEyeConfig() {
-		runner = new ClassicRunner();
+		runner = new VisualGridRunner(new RunnerOptions().testConcurrency(5));
 		config = new Configuration();
 	}
 	
-	public static void setApplitoolCongfig(String applitoolApiKey, String batchName)
+	public static void setApplitoolCongfig(String applitoolApiKey)
 	{
 		
 		createApplitoolEyeConfig();
+		Reflections reflections;
+			reflections = new Reflections(PropertyHolder.testSuiteConfigurationProperties.get("APPLITOOL_CONFIG_PACKAGE").toString());   
+
+			Set<Class<? extends IConfigListner>> classes = reflections.getSubTypesOf(IConfigListner.class);
+				Object[] arr = classes.toArray();
+				try {
+					((Class<? extends IConfigListner>)arr[0]).newInstance().getApplitoolConfig(config);
+				} catch (InstantiationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		config.setApiKey(applitoolApiKey);
-		config.setBatch(new BatchInfo(batchName));
+		config.setBatch(new BatchInfo(PropertyHolder.testSuiteConfigurationProperties.get("BATCH_NAME").toString()));
 
 	}
 
