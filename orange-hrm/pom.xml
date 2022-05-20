@@ -23,7 +23,7 @@
 				<configuration>
 					<!-- Suite testng xml file to consider for test execution -->
 					<suiteXmlFiles>
-						<suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+						<suiteXmlFile>src/test/resources/${testNgFileName}</suiteXmlFile>
 					</suiteXmlFiles>
 				</configuration>
 
