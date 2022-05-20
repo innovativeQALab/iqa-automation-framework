@@ -27,12 +27,12 @@ public class CapabilityFactory {
 			break;
 		case "IOS":
 			System.out.println("*********** IOS IN");
-			fillCapabilities(getProperties("iOS.properties"));
+			fillCapabilities(getProperties("iOSCapabilities.properties"));
 			System.out.println("*********** IOS OUT");
 			break;
 		default:
 			System.out.println("*********** BROWSER IN");
-			fillCapabilities(getProperties("Browser.properties"));
+			fillCapabilities(getProperties("BrowserCapabilities.properties"));
 			System.out.println("*********** BROWSER OUT");
 			break;
 		}
@@ -55,7 +55,13 @@ public class CapabilityFactory {
 
 	private static void fillCapabilities(Properties properties) {
 		System.out.println("fillCapabilities IN - "+properties.toString());
-		properties.forEach((k, v) ->desiredCapabilities.setCapability(k.toString(), v.toString()));
+		// Consider capablities present in testSuiteConfiguration else use from property file. This is useful to pass browserName or version or package from Environment or as Parameter
+		properties.forEach((k, v) ->desiredCapabilities
+				.setCapability(
+						k.toString(), 
+						null!=PropertyHolder.testSuiteConfigurationProperties.getProperty(k.toString())?PropertyHolder.testSuiteConfigurationProperties.getProperty(k.toString()):v.toString())
+						);
+
 		System.out.println("fillCapabilities OUT - "+properties.toString());
 	}
 

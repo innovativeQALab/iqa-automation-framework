@@ -1,6 +1,7 @@
 package org.iqa.test.base;
 
 import org.iqa.suite.commons.PropertyHolder;
+import org.iqa.suite.commons.TestMetaData;
 import org.iqa.suite.commons.applitool.ApplitoolEyes;
 import org.iqa.suite.commons.listeners.SeleniumMethodInvocationListener;
 import org.iqa.suite.commons.reporting.ExtentReportTestFactory;
@@ -88,7 +89,7 @@ public class BaseTest {
 	 
 	 protected void openApplitoolEye(PickleWrapper pickleWrapper, FeatureWrapper featureWrapper)
 	 {
-		 if(ApplitoolEyes.enabled==true)
+		 if(ApplitoolEyes.enabled==true && TestMetaData.getTestTags().contains("@ScreenValidation"))
 			 ApplitoolEyes.createEyes().open(WebDriverFactory.getDriver(),featureWrapper.toString(), pickleWrapper.toString());
 	 }
 }

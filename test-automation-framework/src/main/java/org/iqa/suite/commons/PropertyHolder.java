@@ -14,10 +14,13 @@ import org.slf4j.LoggerFactory;
 public class PropertyHolder {
 
 	public static CustomProperties testSuiteConfigurationProperties = null;
+	
 
 	private static final Logger logger = LoggerFactory.getLogger(SeleniumMethodInvocationListener.class);
 
 	public static void loadPropertyFile(String propFilePath) throws IOException {
+		if(null==testSuiteConfigurationProperties)
+			testSuiteConfigurationProperties = new CustomProperties();
 		InputStream input = new FileInputStream(propFilePath);
 		testSuiteConfigurationProperties.load(input);
 	}
@@ -25,8 +28,6 @@ public class PropertyHolder {
 
 	
 	public static void loadWebDriverConfig() {
-		testSuiteConfigurationProperties = new CustomProperties();
-
 		try {
 			loadPropertyFile("src/test/resources/properties/framework/WebDriverConfig.properties");
 
@@ -41,9 +42,7 @@ public class PropertyHolder {
 	}
 
 	public static void loadApplitoolConfig() {
-		if(null==testSuiteConfigurationProperties)
-			testSuiteConfigurationProperties = new CustomProperties();
-
+		
 		try {
 			loadPropertyFile("src/test/resources/properties/framework/ApplitoolEyeConfig.properties");
 
