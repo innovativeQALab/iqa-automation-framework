@@ -27,5 +27,14 @@ public class SeleniumUtils {
 			e.printStackTrace();
 		}
 	}
+	
+	public static String getScreenshotAsBase64() {
+		if (null == WebDriverFactory.getDriver()) {
+			logger.info("!!!!!! Webdriver is null hence returning from SeleniumUtil > takeScreenShot()");
+			return null;
+		}
+		logger.info("********** Taking screenshot as Base64 ");
+		return  ((TakesScreenshot) WebDriverFactory.getDriver()).getScreenshotAs(OutputType.BASE64);	
+	}
 
 }
