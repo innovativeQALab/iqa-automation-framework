@@ -47,17 +47,9 @@ public class SeleniumMethodInvocationListener implements IInvokedMethodListener 
 			
 			if(!testResult.isSuccess())
 			{
-				try {
 				ExtentReportTestFactory.getTest().fail(testResult.getThrowable());
-				String fileName = new Long(System.currentTimeMillis()).toString().replace(".", "").replace(":", "");
-				SeleniumUtils.takeScreenshot("target/"+fileName+".png");				
-					ExtentReportTestFactory.getTest().addScreenCaptureFromPath("target/"+fileName+".png");
-					logger.debug("******** Screenshot attached to extent report");
-					
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+					ExtentReportTestFactory.getTest().addScreenCaptureFromBase64String(SeleniumUtils.getScreenshotAsBase64());
+					logger.debug("******** Screenshot attached to extent report");					
 			}
 			WebDriverFactory.getDriver().quit();
 			closeApplitoolEye();
