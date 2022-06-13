@@ -14,13 +14,13 @@ public class CustomProperties extends Properties {
 	public String getProperty(String key) {
 		if (null != System.getenv(key)) {
 			logger.info("Property '" + key + "' obtained from System environment variable");
-			System.out.println("Property '" + key + "' obtained from System environment variable");
+			System.out.println("Property '" + key + "' obtained from System environment variable as "+System.getenv(key));
 			return System.getenv(key);
 		}else if (null != System.getProperty(key)) {
-			System.out.println("Property '" + key + "' obtained from System Properties");
+			System.out.println("Property '" + key + "' obtained from System Propertiesas "+System.getProperty(key));
 			return System.getProperty(key);
 		} else if (null != super.getProperty(key)) {
-			System.out.println("Property '" + key + "' obtained from user defined Properties");
+			System.out.println("Property '" + key + "' obtained from Property files as"+super.getProperty(key));
 			return super.getProperty(key);
 		} else {
 			System.out.println("Failed to fetch Property '"+ key+"' Please verify property is defined");
