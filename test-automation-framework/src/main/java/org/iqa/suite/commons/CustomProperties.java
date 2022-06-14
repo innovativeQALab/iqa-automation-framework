@@ -20,7 +20,7 @@ public class CustomProperties extends Properties {
 			System.out.println("Property '" + key + "' obtained from System Properties");
 			return System.getProperty(key);
 		} else if (null != super.getProperty(key)) {
-			System.out.println("Property '" + key + "' obtained from user defined Properties");
+			System.out.println("Property '" + key + "' obtained from Property files");
 			return super.getProperty(key);
 		} else {
 			System.out.println("Failed to fetch Property '"+ key+"' Please verify property is defined");

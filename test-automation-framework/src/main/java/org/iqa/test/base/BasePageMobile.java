@@ -4,6 +4,10 @@ import java.time.Duration;
 
 import org.iqa.suite.commons.AssertionFactory;
 import org.iqa.suite.commons.ExtentLogger;
+import org.iqa.suite.commons.PropertyHolder;
+import org.iqa.suite.commons.TestMetaData;
+import org.iqa.suite.commons.applitool.ApplitoolEyesWeb;
+import org.iqa.suite.commons.applitool.ApplitoolEyesMobile;
 import org.iqa.test.webdriver_factory.WebDriverFactory;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.PageFactory;
@@ -14,6 +18,8 @@ import org.testng.asserts.SoftAssert;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.cucumber.testng.FeatureWrapper;
+import io.cucumber.testng.PickleWrapper;
 
 public class BasePageMobile {
 	protected final static int DEFAULTWAITSECONDS = 10;
@@ -47,5 +53,7 @@ public class BasePageMobile {
 				.ignoring(NoSuchElementException.class);
 		return wait;
 	}
+	
+	 
 
 }

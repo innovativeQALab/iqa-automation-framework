@@ -18,8 +18,8 @@ public class CapabilityFactory {
 	private static DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
 
 	static {
-		System.out.println("*********** Static block called. Platform - " + PropertyHolder.testSuiteConfigurationProperties.get("platform").toString());
-		switch (PropertyHolder.testSuiteConfigurationProperties.get("platform").toString()) {
+		System.out.println("*********** Static block start. Platform - " + PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString());
+		switch (PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString()) {
 		case "ANDROID":
 			System.out.println("*********** ANDROIF IN");
 			fillCapabilities(getProperties("AndroidCapabilities.properties"));

@@ -11,7 +11,9 @@ import java.util.Map;
 import org.iqa.suite.commons.AssertionFactory;
 import org.iqa.suite.commons.DBUtils;
 import org.iqa.suite.commons.ExtentLogger;
-import org.iqa.suite.commons.applitool.ApplitoolEyes;
+import org.iqa.suite.commons.PropertyHolder;
+import org.iqa.suite.commons.TestMetaData;
+import org.iqa.suite.commons.applitool.ApplitoolEyesWeb;
 import org.iqa.suite.commons.database.DBConnection;
 import org.iqa.test.test_data.RuntimeTestDataHolder;
 import org.iqa.test.webdriver_factory.WebDriverFactory;
@@ -23,6 +25,9 @@ import org.openqa.selenium.support.ui.Wait;
 import org.testng.asserts.SoftAssert;
 
 import com.applitools.eyes.selenium.Eyes;
+
+import io.cucumber.testng.FeatureWrapper;
+import io.cucumber.testng.PickleWrapper;
 /**
  * {@inheritDoc}
  * @param otherAnimal Tasty treat.
@@ -33,7 +38,7 @@ public class BasePageBrowser {
 	protected Wait<WebDriver> fluentwait;
 	protected WebDriver driver;
 	public ExtentLogger logger = new ExtentLogger();
-	public Eyes eye = ApplitoolEyes.getEyesForPageObject();
+	public Eyes eye = ApplitoolEyesWeb.getEyesForPageObject();
 	private Map<String,String> runTimeTestData = new HashMap<String,String>();
 
 	public BasePageBrowser()

@@ -1,6 +1,5 @@
 package org.iqa.suite.commons.applitool;
 
-import java.util.Collections;
 import java.util.Set;
 
 import org.iqa.suite.commons.PropertyHolder;
@@ -11,23 +10,22 @@ import org.slf4j.LoggerFactory;
 import com.applitools.eyes.BatchInfo;
 import com.applitools.eyes.EyesRunner;
 import com.applitools.eyes.config.Configuration;
-import com.applitools.eyes.selenium.ClassicRunner;
 import com.applitools.eyes.selenium.Eyes;
 import com.applitools.eyes.visualgrid.services.RunnerOptions;
 import com.applitools.eyes.visualgrid.services.VisualGridRunner;
 
-public class ApplitoolEyes {
+public class ApplitoolEyesWeb {
 	
-	private static EyesRunner runner;
+	private static ThreadLocal<EyesRunner> runner = new ThreadLocal<>();;
 	private static ThreadLocal<Eyes> eyes = new ThreadLocal<>();
 	private static Configuration config ;
 	public static boolean enabled=false;
 	
-    private static final Logger logger = LoggerFactory.getLogger(ApplitoolEyes.class);
+    private static final Logger logger = LoggerFactory.getLogger(ApplitoolEyesWeb.class);
 
 	
 	private static void createApplitoolEyeConfig() {
-		runner = new VisualGridRunner(new RunnerOptions().testConcurrency(5));
+		runner.set(new VisualGridRunner(new RunnerOptions().testConcurrency(5)));
 		config = new Configuration();
 	}
 	
@@ -54,9 +52,13 @@ public class ApplitoolEyes {
 
 	}
 
+	public static EyesRunner getApplitoolEyeRunner()
+	{
+		return runner.get();
+	}
 	public static Eyes getEyes() {
 		
-		if(!ApplitoolEyes.enabled )
+		if(!ApplitoolEyesWeb.enabled )
 		{
 			System.out.println("!!!!!!!!!! Applitool eye either disabled or not configured corrctly. Plase check Applitool configuration in src/test/resources/properties/framework/ApplitoolEyeConfig.proprtis");
 			logger.error("!!!!!!!!!! Applitool eye either disabled or not configured corrctly. Plase check Applitool configuration in src/test/resources/properties/framework/ApplitoolEyeConfig.proprtis");
@@ -71,9 +73,9 @@ public class ApplitoolEyes {
 	}
 
 	public static Eyes createEyes() {
-		if(ApplitoolEyes.enabled )
+		if(ApplitoolEyesWeb.enabled )
 		{
-		eyes.set(new Eyes(runner));
+		eyes.set(new Eyes(runner.get()));
 		eyes.get().setConfiguration(config);
 		}
 		return eyes.get();
