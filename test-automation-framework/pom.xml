@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.innovativeqalab</groupId>
 	<artifactId>test-automation-framework</artifactId>
-	<version>0.0.9</version>
+	<version>0.0.10</version>
 	<packaging>jar</packaging>
 	<name>test-automation-framework</name>
 	<description>Functional Test Automation Framework</description>
@@ -64,7 +64,12 @@
 		</dependency>
 		<dependency>
 			<groupId>com.applitools</groupId>
-			<artifactId>eyes-selenium-java3</artifactId>
+			<artifactId>eyes-selenium-java5</artifactId>
+			<version>RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>com.applitools</groupId>
+			<artifactId>eyes-appium-java5</artifactId>
 			<version>RELEASE</version>
 		</dependency>
 	</dependencies>

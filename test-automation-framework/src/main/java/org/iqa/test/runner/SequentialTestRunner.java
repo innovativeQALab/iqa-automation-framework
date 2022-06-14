@@ -2,7 +2,7 @@ package org.iqa.test.runner;
 
 import org.iqa.suite.commons.AssertionFactory;
 import org.iqa.suite.commons.TestMetaData;
-import org.iqa.suite.commons.applitool.ApplitoolEyes;
+import org.iqa.suite.commons.applitool.ApplitoolEyesWeb;
 import org.iqa.suite.commons.reporting.ExtentReportTestFactory;
 import org.iqa.test.base.BaseTest;
 import org.iqa.test.webdriver_factory.WebDriverFactory;

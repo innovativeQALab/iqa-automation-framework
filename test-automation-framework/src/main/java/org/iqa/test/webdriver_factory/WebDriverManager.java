@@ -23,7 +23,7 @@ public class WebDriverManager {
 	synchronized public static WebDriver CreateInstance() throws MalformedURLException {
 		WebDriver dr = null;
 		try {	
-			if (PropertyHolder.testSuiteConfigurationProperties.get("DRIVER").toString().contains("BROWSER")) {
+			if (PropertyHolder.testSuiteConfigurationProperties.getProperty("DRIVER").toString().contains("BROWSER")) {
 			System.setProperty(PropertyHolder.testSuiteConfigurationProperties.getProperty("DRIVER_PROPERTY_NAME"), PropertyHolder.testSuiteConfigurationProperties.getProperty("DRIVER_EXECUTABLE_PATH"));
 				if (PropertyHolder.testSuiteConfigurationProperties.getProperty("browser").toString().contains("chrome"))
 					dr = new ChromeDriver();
@@ -36,7 +36,7 @@ public class WebDriverManager {
 					System.exit(-1);
 				}
 
-		} else if (PropertyHolder.testSuiteConfigurationProperties.get("DRIVER").toString().contains("REMOTE")) {
+		} else if (PropertyHolder.testSuiteConfigurationProperties.getProperty("DRIVER").toString().contains("REMOTE")) {
 			
 			System.out.println("****** Before Webdriver object creation");
 

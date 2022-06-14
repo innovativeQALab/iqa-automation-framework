@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.iqa.suite.commons.applitool.ApplitoolEyes;
+import org.iqa.suite.commons.applitool.ApplitoolEyesWeb;
 import org.iqa.suite.commons.listeners.SeleniumMethodInvocationListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,7 +52,7 @@ public class PropertyHolder {
 			logger.error(
 					"Applitool Config file not found. Please create config file if you want to use Applitool here.. src/test/resources/properties/framework/ApplitoolEyeConfig.properties");
 			//e.printStackTrace();
-			ApplitoolEyes.enabled=false;
+			ApplitoolEyesWeb.enabled=false;
 		
 		}
 	}
