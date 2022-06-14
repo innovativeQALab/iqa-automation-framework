@@ -112,17 +112,13 @@ public class BaseTest {
 
 	protected void openApplitoolEye(PickleWrapper pickleWrapper, FeatureWrapper featureWrapper) {
 		if ((ApplitoolEyesWeb.enabled == true ||ApplitoolEyesMobile.enabled) == true && TestMetaData.getTestTags().contains("@ScreenValidation")) {
-			if (PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString()
-					.equalsIgnoreCase("LINUX")
-					|| PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString()
-							.equalsIgnoreCase("WINDOWS")) {
+			if (PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString().equalsIgnoreCase("LINUX") || PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString().equalsIgnoreCase("WINDOWS")) 
+			{
 				ApplitoolEyesWeb.createEyes().open(WebDriverFactory.getDriver(), featureWrapper.toString(),
 						pickleWrapper.toString() + ":" + PropertyHolder.testSuiteConfigurationProperties
 								.getProperty("platform").toLowerCase());
-			} else if (PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString()
-					.equalsIgnoreCase("ANDROID")
-					|| PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString()
-							.equalsIgnoreCase("IOS")) {
+			} else if (PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString().equalsIgnoreCase("ANDROID")|| PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString().equalsIgnoreCase("IOS")) 
+			{
 				ApplitoolEyesMobile.createEyes().open(WebDriverFactory.getDriver(), featureWrapper.toString(),
 						pickleWrapper.toString() + ":" + PropertyHolder.testSuiteConfigurationProperties
 								.getProperty("platform").toLowerCase());

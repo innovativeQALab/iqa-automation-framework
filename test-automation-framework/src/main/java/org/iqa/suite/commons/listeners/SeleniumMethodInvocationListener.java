@@ -1,11 +1,11 @@
 package org.iqa.suite.commons.listeners;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.HashMap;
 
 import org.iqa.suite.commons.SeleniumUtils;
 import org.iqa.suite.commons.TestMetaData;
+import org.iqa.suite.commons.applitool.ApplitoolEyesMobile;
 import org.iqa.suite.commons.applitool.ApplitoolEyesWeb;
 import org.iqa.suite.commons.reporting.ExtentReportTestFactory;
 import org.iqa.test.test_data.RuntimeTestDataHolder;
@@ -62,6 +62,9 @@ public class SeleniumMethodInvocationListener implements IInvokedMethodListener 
 			 {	 
 				 	ApplitoolEyesWeb.getEyes().closeAsync();
 				 	
+			 }else if(ApplitoolEyesMobile.enabled==true && null!=ApplitoolEyesMobile.getEyes() && ApplitoolEyesMobile.getEyes().getIsOpen())
+			 {
+					ApplitoolEyesMobile.getEyes().closeAsync();
 			 }
 		 }
 }
