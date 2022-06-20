@@ -31,7 +31,7 @@ public class ApplitoolEyesMobile {
 		
 		createApplitoolEyeConfig();
 //		Reflections reflections;
-//			reflections = new Reflections(PropertyHolder.testSuiteConfigurationProperties.get("APPLITOOL_CONFIG_PACKAGE").toString());   
+//			reflections = new Reflections(PropertyHolder.testSuiteConfigurationProperties.getProperty("APPLITOOL_CONFIG_PACKAGE").toString());   
 //
 //			Set<Class<? extends IConfigListner>> classes = reflections.getSubTypesOf(IConfigListner.class);
 //				Object[] arr = classes.toArray();
@@ -45,7 +45,7 @@ public class ApplitoolEyesMobile {
 //					e.printStackTrace();
 //				}
 		config.setApiKey(applitoolApiKey);
-		config.setBatch(new BatchInfo(PropertyHolder.testSuiteConfigurationProperties.get("BATCH_NAME").toString()));
+		config.setBatch(new BatchInfo(PropertyHolder.testSuiteConfigurationProperties.getProperty("BATCH_NAME").toString()));
 
 	}
 
