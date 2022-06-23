@@ -16,7 +16,7 @@ import com.applitools.eyes.visualgrid.services.VisualGridRunner;
 
 public class ApplitoolEyesWeb {
 	
-	private static ThreadLocal<EyesRunner> runner = new ThreadLocal<>();;
+	private static ThreadLocal<VisualGridRunner> runner = new ThreadLocal<>();;
 	private static ThreadLocal<Eyes> eyes = new ThreadLocal<>();
 	private static Configuration config ;
 	public static boolean enabled=false;
@@ -25,7 +25,7 @@ public class ApplitoolEyesWeb {
 
 	
 	private static void createApplitoolEyeConfig() {
-		runner.set(new VisualGridRunner(new RunnerOptions().testConcurrency(5)));
+		runner.set(new VisualGridRunner(new RunnerOptions().testConcurrency(20)));
 		config = new Configuration();
 	}
 	
@@ -47,6 +47,7 @@ public class ApplitoolEyesWeb {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+		
 		config.setApiKey(applitoolApiKey);
 		config.setBatch(new BatchInfo(PropertyHolder.testSuiteConfigurationProperties.getProperty("BATCH_NAME").toString()));
 
