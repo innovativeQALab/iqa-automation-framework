@@ -8,9 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.applitools.eyes.BatchInfo;
-import com.applitools.eyes.EyesRunner;
 import com.applitools.eyes.appium.Eyes;
 import com.applitools.eyes.config.Configuration;
+import com.applitools.eyes.selenium.StitchMode;
 
 public class ApplitoolEyesMobile {
 	
@@ -30,21 +30,22 @@ public class ApplitoolEyesMobile {
 	{
 		
 		createApplitoolEyeConfig();
-//		Reflections reflections;
-//			reflections = new Reflections(PropertyHolder.testSuiteConfigurationProperties.getProperty("APPLITOOL_CONFIG_PACKAGE").toString());   
-//
-//			Set<Class<? extends IConfigListner>> classes = reflections.getSubTypesOf(IConfigListner.class);
-//				Object[] arr = classes.toArray();
-//				try {
-//					((Class<? extends IConfigListner>)arr[0]).newInstance().getApplitoolConfig(config);
-//				} catch (InstantiationException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				} catch (IllegalAccessException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
+		Reflections reflections;
+			reflections = new Reflections(PropertyHolder.testSuiteConfigurationProperties.getProperty("APPLITOOL_CONFIG_PACKAGE").toString());   
+
+			Set<Class<? extends IConfigListner>> classes = reflections.getSubTypesOf(IConfigListner.class);
+				Object[] arr = classes.toArray();
+				try {
+					((Class<? extends IConfigListner>)arr[0]).newInstance().getApplitoolConfig(config);
+				} catch (InstantiationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		config.setApiKey(applitoolApiKey);
+		config.setStitchMode(StitchMode.CSS);
 		config.setBatch(new BatchInfo(PropertyHolder.testSuiteConfigurationProperties.getProperty("BATCH_NAME").toString()));
 
 	}

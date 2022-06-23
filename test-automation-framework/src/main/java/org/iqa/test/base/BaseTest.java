@@ -1,10 +1,9 @@
 package org.iqa.test.base;
 
-import org.iqa.suite.commons.CustomProperties;
 import org.iqa.suite.commons.PropertyHolder;
 import org.iqa.suite.commons.TestMetaData;
-import org.iqa.suite.commons.applitool.ApplitoolEyesWeb;
 import org.iqa.suite.commons.applitool.ApplitoolEyesMobile;
+import org.iqa.suite.commons.applitool.ApplitoolEyesWeb;
 import org.iqa.suite.commons.listeners.SeleniumMethodInvocationListener;
 import org.iqa.suite.commons.reporting.ExtentReportTestFactory;
 import org.iqa.test.webdriver_factory.WebDriverFactory;
@@ -16,6 +15,9 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
+
+import com.applitools.eyes.RectangleSize;
+import com.applitools.eyes.TestResultsSummary;
 
 import io.cucumber.testng.FeatureWrapper;
 import io.cucumber.testng.PickleWrapper;
@@ -116,7 +118,7 @@ public class BaseTest {
 			{
 				ApplitoolEyesWeb.createEyes().open(WebDriverFactory.getDriver(), featureWrapper.toString(),
 						pickleWrapper.toString() + ":" + PropertyHolder.testSuiteConfigurationProperties
-								.getProperty("platform").toLowerCase());
+								.getProperty("platform").toLowerCase(),new RectangleSize(1024, 768));
 			} else if (PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString().equalsIgnoreCase("ANDROID")|| PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString().equalsIgnoreCase("IOS")) 
 			{
 				ApplitoolEyesMobile.createEyes().open(WebDriverFactory.getDriver(), featureWrapper.toString(),
@@ -128,6 +130,6 @@ public class BaseTest {
 	}
 
 	protected void applicationToolEyeWebGetAllTestResults() {
-		ApplitoolEyesWeb.getApplitoolEyeRunner().getAllTestResults();
+		TestResultsSummary testResultSummary=ApplitoolEyesWeb.getApplitoolEyeRunner().getAllTestResults(true);
 	}
 }
