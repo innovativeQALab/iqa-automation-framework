@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.innovativeqalab</groupId>
 	<artifactId>test-automation-framework</artifactId>
@@ -64,13 +66,15 @@
 		</dependency>
 		<dependency>
 			<groupId>com.applitools</groupId>
-			<artifactId>eyes-selenium-java5</artifactId>
-			<version>RELEASE</version>
+			<artifactId>eyes-selenium-java3</artifactId>
+			<version>3.213.0</version>
+
 		</dependency>
 		<dependency>
 			<groupId>com.applitools</groupId>
-			<artifactId>eyes-appium-java5</artifactId>
-			<version>RELEASE</version>
+			<artifactId>eyes-appium-java3</artifactId>
+			<version>3.213.0</version>
+
 		</dependency>
 	</dependencies>
 	<!-- <build> Source directory configuration <sourceDirectory>src</sourceDirectory> 
@@ -130,7 +134,8 @@
 							<goal>sign</goal>
 						</goals>
 						<configuration>
-							<!-- Prevent gpg from using pinentry programs. Fixes: gpg: signing failed: Inappropriate ioctl for device -->
+							<!-- Prevent gpg from using pinentry programs. Fixes: gpg: signing 
+								failed: Inappropriate ioctl for device -->
 							<gpgArguments>
 								<arg>--pinentry-mode</arg>
 								<arg>loopback</arg>
