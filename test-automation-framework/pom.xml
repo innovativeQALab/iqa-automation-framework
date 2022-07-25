@@ -72,8 +72,8 @@
 		</dependency>
 		<dependency>
 			<groupId>com.applitools</groupId>
-			<artifactId>eyes-appium-java3</artifactId>
-			<version>3.213.0</version>
+			<artifactId>eyes-appium-java5</artifactId>
+			<version>5.13.0</version>
 
 		</dependency>
 	</dependencies>
