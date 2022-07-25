@@ -28,6 +28,7 @@ public class SeleniumMethodInvocationListener implements IInvokedMethodListener 
 			logger.info("******** In before invocation");
 			try {
 				WebDriverFactory.setDriver(WebDriverManager.CreateInstance());
+				WebDriverFactory.getDriver().manage().window().maximize();
 				RuntimeTestDataHolder.setRunTimeTestData(new HashMap<String,String>());
 				TestMetaData.initialize();
 				logger.info("******** Driver object and test report instance created successfully");
