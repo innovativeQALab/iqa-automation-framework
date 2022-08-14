@@ -2,15 +2,12 @@ package com.orangehrm.pages.web;
 
 import org.iqa.suite.commons.PropertyHolder;
 import org.iqa.suite.commons.TestMetaData;
-import org.iqa.suite.commons.applitool.ApplitoolEyes;
+import org.iqa.suite.commons.applitool.ApplitoolEyesWeb;
 import org.iqa.test.base.BasePageBrowser;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.When;
 
 public class LoginPage extends BasePageBrowser{
 	
@@ -56,8 +53,8 @@ public class LoginPage extends BasePageBrowser{
 
 	public LoginPage isPageLoaded() {
 		
-		if (TestMetaData.getTestTags().contains("@ScreenValidation") && ApplitoolEyes.enabled) {
-            ApplitoolEyes.getEyes().checkWindow("Login Page");
+		if (TestMetaData.getTestTags().contains("@ScreenValidation") && ApplitoolEyesWeb.enabled) {
+            ApplitoolEyesWeb.getEyes().checkWindow("Login Page");
         }
 		
 		return this;
