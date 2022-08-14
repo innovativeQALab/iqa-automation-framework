@@ -1,6 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.innovativeqalab</groupId>
 	<artifactId>test-automation-framework</artifactId>
@@ -68,13 +66,16 @@
 			<groupId>com.applitools</groupId>
 			<artifactId>eyes-selenium-java3</artifactId>
 			<version>3.213.0</version>
-
 		</dependency>
 		<dependency>
 			<groupId>com.applitools</groupId>
 			<artifactId>eyes-appium-java5</artifactId>
 			<version>5.13.0</version>
-
+		</dependency>
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+			<version>5.0.1</version>
 		</dependency>
 	</dependencies>
 	<!-- <build> Source directory configuration <sourceDirectory>src</sourceDirectory> 
