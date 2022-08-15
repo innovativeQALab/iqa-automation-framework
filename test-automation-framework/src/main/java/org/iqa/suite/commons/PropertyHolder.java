@@ -14,26 +14,22 @@ import org.slf4j.LoggerFactory;
 public class PropertyHolder {
 
 	public static CustomProperties testSuiteConfigurationProperties = null;
-	
 
-	private static final Logger logger = LoggerFactory.getLogger(SeleniumMethodInvocationListener.class);
+	private static final Logger logger = LoggerFactory.getLogger(PropertyHolder.class);
 
 	public static void loadPropertyFile(String propFilePath) throws IOException {
-		if(null==testSuiteConfigurationProperties)
+		if (null == testSuiteConfigurationProperties)
 			testSuiteConfigurationProperties = new CustomProperties();
 		InputStream input = new FileInputStream(propFilePath);
 		testSuiteConfigurationProperties.load(input);
 	}
 
-
-	
 	public static void loadWebDriverConfig() {
 		try {
 			loadPropertyFile("src/test/resources/properties/framework/WebDriverConfig.properties");
+			logger.info("WebDriverConfig.properties loaded.");
 
 		} catch (IOException e) {
-			System.out.println(
-					"Error while loading property WebDriverConfig.properties file. \n Please check content of property file and try again.");
 			logger.error(
 					"Error while loading property WebDriverConfig.properties file. \n Please check content of property file and try again.");
 			e.printStackTrace();
@@ -42,22 +38,19 @@ public class PropertyHolder {
 	}
 
 	public static void loadApplitoolConfig() {
-		
+
 		try {
 			loadPropertyFile("src/test/resources/properties/framework/ApplitoolEyeConfig.properties");
-
+			logger.info("ApplitoolEyeConfig.properties");
 		} catch (IOException e) {
-			System.out.println(
-					"Applitool Config file not found. Please create config file if you want to use Applitool here.. src/test/resources/properties/framework/ApplitoolEyeConfig.properties");
+
 			logger.error(
 					"Applitool Config file not found. Please create config file if you want to use Applitool here.. src/test/resources/properties/framework/ApplitoolEyeConfig.properties");
-			//e.printStackTrace();
-			ApplitoolEyesWeb.enabled=false;
-		
+			ApplitoolEyesWeb.enabled = false;
+
 		}
 	}
-	
-	
+
 	public static void loadGeneralConfig() {
 		File[] files = new File("src/test/resources/properties/userDefined").listFiles();
 		for (File file : files) {
