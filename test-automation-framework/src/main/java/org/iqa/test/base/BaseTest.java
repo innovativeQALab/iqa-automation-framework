@@ -15,10 +15,8 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
-
 import com.applitools.eyes.RectangleSize;
 import com.applitools.eyes.TestResultsSummary;
-
 import io.cucumber.testng.FeatureWrapper;
 import io.cucumber.testng.PickleWrapper;
 import io.cucumber.testng.TestNGCucumberRunner;
@@ -39,27 +37,38 @@ public class BaseTest {
 	@Parameters({ "featureFilePath", "glueCodePackageName", "tagsToExecute" })
 	@BeforeSuite
 	public void beforeSuite(String featureFilePath, String glueCodePackageName, String tagsToExecute) {
+
 		String tagToIncludeCommandOption = tagsToExecute.trim() != "" && tagsToExecute != null
 				? " --tags \"" + tagsToExecute + "\""
 				: "";
-		System.out.println("********* tags to execute command" + tagToIncludeCommandOption);
 		System.setProperty("cucumber.options",
 				featureFilePath + " --glue " + glueCodePackageName + " " + tagToIncludeCommandOption);
-
+		logger.info("********* Cucumber Options set as :" + featureFilePath + " --glue " + glueCodePackageName + " "
+				+ tagToIncludeCommandOption);
 		cucumberRunner = new TestNGCucumberRunner(this.getClass());
+		logger.info("TestNGCucumberRunner object initialization completed.");
 
-		this.loadAllconfiguration();
-		this.setApplitoolEyeConfig();
+		PropertyHolder.loadGeneralConfig();
+		if (null != PropertyHolder.testSuiteConfigurationProperties.get("AUT")
+				&& !PropertyHolder.testSuiteConfigurationProperties.get("AUT").toString().equalsIgnoreCase("API")) {
+			PropertyHolder.loadWebDriverConfig();
+			PropertyHolder.loadApplitoolConfig();
+			this.setApplitoolEyeConfig();
+		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@AfterSuite
 	public void afterSuite() {
 		ExtentReportTestFactory.flushReport();
-		if (null != PropertyHolder.testSuiteConfigurationProperties.get("EYE_ENABLE")
-				&& new Boolean(PropertyHolder.testSuiteConfigurationProperties.get("EYE_ENABLE").toString()) == true) {
-			if (PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString()
-					.equalsIgnoreCase("LINUX")) {
-				applicationToolEyeWebGetAllTestResults(); // Only for Web
+		if (null != PropertyHolder.testSuiteConfigurationProperties.get("AUT")
+				&& !PropertyHolder.testSuiteConfigurationProperties.get("AUT").toString().equalsIgnoreCase("API")) {
+			if (null != PropertyHolder.testSuiteConfigurationProperties.get("EYE_ENABLE") && new Boolean(
+					PropertyHolder.testSuiteConfigurationProperties.get("EYE_ENABLE").toString()) == true) {
+				if (PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString()
+						.equalsIgnoreCase("LINUX")) {
+					applicationToolEyeWebGetAllTestResults(); // Only for Web
+				}
 			}
 		}
 
@@ -67,21 +76,25 @@ public class BaseTest {
 
 	@DataProvider(name = "cucumber-examples-parallel", parallel = true)
 	public Object[][] dataProviderParallel() {
-		return cucumberRunner.provideScenarios();
+		return getCucumberScenarios();
 	}
 
 	@DataProvider(name = "cucumber-examples-sequential", parallel = false)
 	public Object[][] dataProviderSequencrial() {
-		return cucumberRunner.provideScenarios();
+		return getCucumberScenarios();
 	}
 
-	private void loadAllconfiguration() {
-		PropertyHolder.loadWebDriverConfig();
-		PropertyHolder.loadGeneralConfig();
-		PropertyHolder.loadApplitoolConfig();
-
+	private Object[][] getCucumberScenarios() {
+		Object[][] cucumberScenarios = null;
+		try {
+			cucumberScenarios = cucumberRunner.provideScenarios();
+		} catch (Exception e) {
+			logger.error("!!!!!!!!!!!!ERROR Please check feature file if there are any lexical errors!!!");
+		}
+		return cucumberScenarios;
 	}
 
+	@SuppressWarnings("deprecation")
 	private void setApplitoolEyeConfig() {
 		if (null != PropertyHolder.testSuiteConfigurationProperties.get("EYE_ENABLE")
 				&& new Boolean(PropertyHolder.testSuiteConfigurationProperties.get("EYE_ENABLE").toString()) == true) {
@@ -113,14 +126,20 @@ public class BaseTest {
 	}
 
 	protected void openApplitoolEye(PickleWrapper pickleWrapper, FeatureWrapper featureWrapper) {
-		if ((ApplitoolEyesWeb.enabled == true ||ApplitoolEyesMobile.enabled) == true && TestMetaData.getTestTags().contains("@ScreenValidation")) {
-			if (PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString().equalsIgnoreCase("LINUX") || PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString().equalsIgnoreCase("WINDOWS")) 
-			{
+		if ((ApplitoolEyesWeb.enabled == true || ApplitoolEyesMobile.enabled) == true
+				&& TestMetaData.getTestTags().contains("@ScreenValidation")) {
+			if (PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString()
+					.equalsIgnoreCase("LINUX")
+					|| PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString()
+							.equalsIgnoreCase("WINDOWS")) {
 				ApplitoolEyesWeb.createEyes().open(WebDriverFactory.getDriver(), featureWrapper.toString(),
-						pickleWrapper.toString() + ":" + PropertyHolder.testSuiteConfigurationProperties
-								.getProperty("platform").toLowerCase(),new RectangleSize(1024, 751));
-			} else if (PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString().equalsIgnoreCase("ANDROID")|| PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString().equalsIgnoreCase("IOS")) 
-			{
+						pickleWrapper.toString() + ":"
+								+ PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toLowerCase(),
+						new RectangleSize(1024, 751));
+			} else if (PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString()
+					.equalsIgnoreCase("ANDROID")
+					|| PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString()
+							.equalsIgnoreCase("IOS")) {
 				ApplitoolEyesMobile.createEyes().open(WebDriverFactory.getDriver(), featureWrapper.toString(),
 						pickleWrapper.toString() + ":" + PropertyHolder.testSuiteConfigurationProperties
 								.getProperty("platform").toLowerCase());
@@ -130,6 +149,6 @@ public class BaseTest {
 	}
 
 	protected void applicationToolEyeWebGetAllTestResults() {
-		TestResultsSummary testResultSummary=ApplitoolEyesWeb.getApplitoolEyeRunner().getAllTestResults(true);
+		TestResultsSummary testResultSummary = ApplitoolEyesWeb.getApplitoolEyeRunner().getAllTestResults(true);
 	}
 }

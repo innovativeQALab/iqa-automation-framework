@@ -3,6 +3,7 @@ package org.iqa.suite.commons.listeners;
 import java.net.MalformedURLException;
 import java.util.HashMap;
 
+import org.iqa.suite.commons.PropertyHolder;
 import org.iqa.suite.commons.SeleniumUtils;
 import org.iqa.suite.commons.TestMetaData;
 import org.iqa.suite.commons.applitool.ApplitoolEyesMobile;
@@ -17,55 +18,59 @@ import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestResult;
 
-
 public class SeleniumMethodInvocationListener implements IInvokedMethodListener {
-    private static final Logger logger = LoggerFactory.getLogger(SeleniumMethodInvocationListener.class);
+	private static final Logger logger = LoggerFactory.getLogger(SeleniumMethodInvocationListener.class);
 
 	public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
 		logger.info("******** In before invocation");
-		if(method.isTestMethod())
-		{
+		if (method.isTestMethod()) {
 			logger.info("******** In before invocation");
-			try {
-				WebDriverFactory.setDriver(WebDriverManager.CreateInstance());
-				WebDriverFactory.getDriver().manage().window().maximize();
-				RuntimeTestDataHolder.setRunTimeTestData(new HashMap<String,String>());
-				TestMetaData.initialize();
-				logger.info("******** Driver object and test report instance created successfully");
-			} catch (MalformedURLException e) {
-				logger.error("!!!!!!!! Exception while creating Driver object and test report instance ");
-				e.printStackTrace();
+			if (null != PropertyHolder.testSuiteConfigurationProperties.get("AUT")
+					&& !PropertyHolder.testSuiteConfigurationProperties.get("AUT").toString().equalsIgnoreCase("API")) {
+				try {
+					WebDriverFactory.setDriver(WebDriverManager.CreateInstance());
+					WebDriverFactory.getDriver().manage().window().maximize();
+
+					logger.info("******** Driver object and test report instance created successfully");
+				} catch (MalformedURLException e) {
+					logger.error("!!!!!!!! Exception while creating Driver object and test report instance ");
+					e.printStackTrace();
+				}
 			}
+			RuntimeTestDataHolder.setRunTimeTestData(new HashMap<String, String>());
+			logger.info("********RuntimeTestDataHolder initialized.");
+			TestMetaData.initialize();
+			logger.info("********TestMetaData initialized.");
 		}
-		
+
 	}
 
 	public void afterInvocation(IInvokedMethod method, ITestResult testResult) {
-		if(method.isTestMethod())
-		{
+		if (method.isTestMethod()) {
 			logger.info("******** In after invocation");
-			logger.info("******** In after invocation - Test Case Status " +testResult.isSuccess());
-			
-			if(!testResult.isSuccess())
-			{
-				ExtentReportTestFactory.getTest().fail(testResult.getThrowable());
-					ExtentReportTestFactory.getTest().addScreenCaptureFromBase64String(SeleniumUtils.getScreenshotAsBase64());
-					logger.debug("******** Screenshot attached to extent report");					
+			logger.info("******** In after invocation - Test Case Status " + testResult.isSuccess());
+			if (null != PropertyHolder.testSuiteConfigurationProperties.get("AUT")
+					&& !PropertyHolder.testSuiteConfigurationProperties.get("AUT").toString().equalsIgnoreCase("API")) {
+				if (!testResult.isSuccess()) {
+					ExtentReportTestFactory.getTest().fail(testResult.getThrowable());
+					ExtentReportTestFactory.getTest()
+							.addScreenCaptureFromBase64String(SeleniumUtils.getScreenshotAsBase64());
+					logger.debug("******** Screenshot attached to extent report");
+				}
+				WebDriverFactory.getDriver().quit();
+				closeApplitoolEye();
 			}
-			WebDriverFactory.getDriver().quit();
-			closeApplitoolEye();
 		}
 	}
-	
-		 protected void closeApplitoolEye()
-		 {
-			 if(ApplitoolEyesWeb.enabled==true && null!=ApplitoolEyesWeb.getEyes() && ApplitoolEyesWeb.getEyes().getIsOpen())
-			 {	 
-				 	ApplitoolEyesWeb.getEyes().closeAsync();
-				 	
-			 }else if(ApplitoolEyesMobile.enabled==true && null!=ApplitoolEyesMobile.getEyes() && ApplitoolEyesMobile.getEyes().getIsOpen())
-			 {
-					ApplitoolEyesMobile.getEyes().closeAsync();
-			 }
-		 }
+
+	protected void closeApplitoolEye() {
+		if (ApplitoolEyesWeb.enabled == true && null != ApplitoolEyesWeb.getEyes()
+				&& ApplitoolEyesWeb.getEyes().getIsOpen()) {
+			ApplitoolEyesWeb.getEyes().closeAsync();
+
+		} else if (ApplitoolEyesMobile.enabled == true && null != ApplitoolEyesMobile.getEyes()
+				&& ApplitoolEyesMobile.getEyes().getIsOpen()) {
+			ApplitoolEyesMobile.getEyes().closeAsync();
+		}
+	}
 }
