@@ -77,6 +77,16 @@
 			<artifactId>HikariCP</artifactId>
 			<version>5.0.1</version>
 		</dependency>
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>5.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20220320</version>
+		</dependency>
 	</dependencies>
 	<!-- <build> Source directory configuration <sourceDirectory>src</sourceDirectory> 
 		<plugins> Following plugin executes the testng tests <plugin> <groupId>org.apache.maven.plugins</groupId> 
