@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.innovativeqalab</groupId>
 	<artifactId>test-automation-framework</artifactId>
-	<version>0.0.13</version>
+	<version>0.1.0</version>
 	<packaging>jar</packaging>
 	<name>test-automation-framework</name>
 	<description>Functional Test Automation Framework</description>
@@ -68,13 +68,26 @@
 			<groupId>com.applitools</groupId>
 			<artifactId>eyes-selenium-java3</artifactId>
 			<version>3.213.0</version>
-
 		</dependency>
 		<dependency>
 			<groupId>com.applitools</groupId>
 			<artifactId>eyes-appium-java5</artifactId>
 			<version>5.13.0</version>
-
+		</dependency>
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+			<version>4.0.3</version>
+		</dependency>
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>5.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20220320</version>
 		</dependency>
 	</dependencies>
 	<!-- <build> Source directory configuration <sourceDirectory>src</sourceDirectory> 

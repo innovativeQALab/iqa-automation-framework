@@ -1,13 +1,11 @@
 package com.orangehrm.pages.web;
 
 import org.iqa.suite.commons.TestMetaData;
-import org.iqa.suite.commons.applitool.ApplitoolEyes;
+import org.iqa.suite.commons.applitool.ApplitoolEyesWeb;
 import org.iqa.test.base.BasePageBrowser;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
-
-import io.cucumber.java.en.Then;
 
 public class HomePage extends BasePageBrowser {
 
@@ -24,8 +22,8 @@ public class HomePage extends BasePageBrowser {
 	}
 
 	public HomePage isPageLoaded() {
-		if (TestMetaData.getTestTags().contains("@ScreenValidation") && ApplitoolEyes.enabled) {
-            ApplitoolEyes.getEyes().checkWindow("Home Page");
+		if (TestMetaData.getTestTags().contains("@ScreenValidation") && ApplitoolEyesWeb.enabled) {
+            ApplitoolEyesWeb.getEyes().checkWindow("Home Page");
         }
 		return this;
 	}

@@ -18,47 +18,59 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 
 public class WebDriverManager {
-    private static final Logger logger = LoggerFactory.getLogger(SeleniumMethodInvocationListener.class);
+	private static final Logger logger = LoggerFactory.getLogger(SeleniumMethodInvocationListener.class);
 
 	synchronized public static WebDriver CreateInstance() throws MalformedURLException {
 		WebDriver dr = null;
-		try {	
+		try {
 			if (PropertyHolder.testSuiteConfigurationProperties.getProperty("DRIVER").toString().contains("BROWSER")) {
-			System.setProperty(PropertyHolder.testSuiteConfigurationProperties.getProperty("DRIVER_PROPERTY_NAME"), PropertyHolder.testSuiteConfigurationProperties.getProperty("DRIVER_EXECUTABLE_PATH"));
-				if (PropertyHolder.testSuiteConfigurationProperties.getProperty("browser").toString().contains("chrome"))
+				System.setProperty(PropertyHolder.testSuiteConfigurationProperties.getProperty("DRIVER_PROPERTY_NAME"),
+						PropertyHolder.testSuiteConfigurationProperties.getProperty("DRIVER_EXECUTABLE_PATH"));
+				if (PropertyHolder.testSuiteConfigurationProperties.getProperty("browser").toString()
+						.contains("chrome"))
 					dr = new ChromeDriver();
-				else if (PropertyHolder.testSuiteConfigurationProperties.getProperty("browser").toString().contains("firefox"))
+				else if (PropertyHolder.testSuiteConfigurationProperties.getProperty("browser").toString()
+						.contains("firefox"))
 					dr = new FirefoxDriver();
-				else if (PropertyHolder.testSuiteConfigurationProperties.getProperty("browser").toString().contains("ie"))
+				else if (PropertyHolder.testSuiteConfigurationProperties.getProperty("browser").toString()
+						.contains("ie"))
 					dr = new InternetExplorerDriver();
 				else {
-					System.out.println("!!!!!!!!!!  Browser Name is not found. Exiting");
+					logger.error("!!!!!!!!!!Error - Browser Name is not found. Exiting...");
 					System.exit(-1);
 				}
 
-		} else if (PropertyHolder.testSuiteConfigurationProperties.getProperty("DRIVER").toString().contains("REMOTE")) {
-			
-			System.out.println("****** Before Webdriver object creation");
+			} else if (PropertyHolder.testSuiteConfigurationProperties.getProperty("DRIVER").toString()
+					.contains("REMOTE")) {
 
+				logger.info("****** Before Webdriver object creation");
 
-			if (PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString().equalsIgnoreCase("Android"))
-				dr = new AndroidDriver<WebElement>(new URL(PropertyHolder.testSuiteConfigurationProperties.getProperty("hubUrl").toString()), CapabilityFactory.getDesiredCapabilities());
-			else if(PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString().equalsIgnoreCase("iOS"))
-				dr = new IOSDriver<WebElement>(new URL(PropertyHolder.testSuiteConfigurationProperties.getProperty("hubUrl").toString()), CapabilityFactory.getDesiredCapabilities());
-			else
-				dr = new RemoteWebDriver(new URL(PropertyHolder.testSuiteConfigurationProperties.getProperty("hubUrl").toString()), CapabilityFactory.getDesiredCapabilities());
-			
-			System.out.println("****** After Webdriver object creation");
+				if (PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString()
+						.equalsIgnoreCase("Android"))
+					dr = new AndroidDriver<WebElement>(
+							new URL(PropertyHolder.testSuiteConfigurationProperties.getProperty("hubUrl").toString()),
+							CapabilityFactory.getDesiredCapabilities());
+				else if (PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString()
+						.equalsIgnoreCase("iOS"))
+					dr = new IOSDriver<WebElement>(
+							new URL(PropertyHolder.testSuiteConfigurationProperties.getProperty("hubUrl").toString()),
+							CapabilityFactory.getDesiredCapabilities());
+				else
+					dr = new RemoteWebDriver(
+							new URL(PropertyHolder.testSuiteConfigurationProperties.getProperty("hubUrl").toString()),
+							CapabilityFactory.getDesiredCapabilities());
 
-		} else {
-			System.out.println("!!!!!!!! Unable to create driver object");
-			System.exit(-1);
-		}
+				logger.info("****** After Webdriver object creation");
+
+			} else {
+				logger.error("!!!!!!!!ERROR - Unable to create driver object");
+				System.exit(-1);
+			}
 		} catch (Exception e) {
-			logger.error("!!!!!!!!!! Unable to create browser object. ");
+			logger.error("!!!!!!!!!!ERROR - Unable to create browser object. ");
 			e.printStackTrace();
 		}
-		System.out.println("******** In after object creation");
+		logger.info("******** In after object creation");
 		return dr;
 	}
 }
