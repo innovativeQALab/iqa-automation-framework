@@ -91,7 +91,7 @@ public class DBUtils {
 	 * 
 	 * @return ResultSet result
 	 */
-	public ResultSet executeSelectQuery(String query, String dbName) {
+	public static ResultSet executeSelectQuery(String query, String dbName) {
 
 		ResultSet result = null;
 		try {
@@ -113,7 +113,7 @@ public class DBUtils {
 	 * 
 	 * @return int resultCount
 	 */
-	public int executeUpdateOrDeleteQuery(String query, String dbName) {
+	public static int executeUpdateOrDeleteQuery(String query, String dbName) {
 		int resultCount = 0;
 		try {
 			Connection conn = DBUtils.getConnection(dbName);
