@@ -27,8 +27,8 @@ public class BasePageBrowser {
 	protected SoftAssert softAssert;
 	protected Wait<WebDriver> fluentwait;
 	protected WebDriver driver;
-	public ExtentLogger extentLogger = new ExtentLogger();
-	private static final Logger logger = LoggerFactory.getLogger(BasePageBrowser.class);
+	protected ExtentLogger extentLogger = new ExtentLogger();
+	protected static final Logger logger = LoggerFactory.getLogger(BasePageBrowser.class);
 	public Eyes eye = ApplitoolEyesWeb.getEyesForPageObject();
 	private Map<String, String> runTimeTestData = new HashMap<String, String>();
 	private static final int DEFAULT_WAIT_TIMEOUT = 30;
@@ -44,7 +44,7 @@ public class BasePageBrowser {
 	}
 
 	public Wait<WebDriver> getFluentWaitTimeout() {
-		return new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(15)).pollingEvery(Duration.ofSeconds(1))
+		return new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(DEFAULT_WAIT_TIMEOUT)).pollingEvery(Duration.ofSeconds(1))
 				.ignoring(NoSuchElementException.class);
 	}
 
