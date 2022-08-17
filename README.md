@@ -4,6 +4,9 @@
 
 Selenium WebDriver and Appium based Web, Mobile (Android, iOS) and Windows desktop Automation Framework with BDD implementation support
 
+### iQA Test Automation Framework Architecture
+
+![image](https://user-images.githubusercontent.com/30923231/185048624-221c0edc-aaf8-4e82-b66d-0655f1368826.png)
 
 ### Features
 1) With few Configurations and adding dependencies, you are ready to use this framework
@@ -29,7 +32,7 @@ Dependency:
 		<dependency>
 			<groupId>io.github.innovativeqalab</groupId>
 			<artifactId>test-automation-framework</artifactId>
-			<version>0.0.2</version>
+			<version>0.2.0</version>
 		</dependency>
 	</dependencies>
 ```
