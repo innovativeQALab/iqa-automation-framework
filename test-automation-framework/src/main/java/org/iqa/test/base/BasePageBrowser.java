@@ -19,6 +19,7 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.TestException;
 import org.testng.asserts.SoftAssert;
 import com.applitools.eyes.selenium.Eyes;
 
@@ -93,7 +94,7 @@ public class BasePageBrowser {
 			return wait.until(ExpectedConditions.visibilityOf(element));
 		} catch (Exception e) {
 			logger.error("!!!!!!!ERROR Element is not visible\n" + e.getMessage());
-			return null;
+			throw new TestException(String.format("The element is not visible on screen : [%s]", element));
 		}
 	}
 
@@ -122,7 +123,7 @@ public class BasePageBrowser {
 			return wait.until(ExpectedConditions.elementToBeClickable(element));
 		} catch (Exception e) {
 			logger.error("!!!!!!!ERROR Element is not clickable\n" + e.getMessage());
-			return null;
+			throw new TestException(String.format("The element is not clickable : [%s]", element));
 		}
 	}
 
@@ -148,6 +149,7 @@ public class BasePageBrowser {
 			element.click();
 		} catch (Exception e) {
 			logger.error("!!!!!!!ERROR Element is not clickable\n" + e.getMessage());
+			throw new TestException(String.format("The element is not clickable : [%s]", element));
 		}
 	}
 
@@ -156,12 +158,13 @@ public class BasePageBrowser {
 	 * 
 	 * @param WebElement element
 	 */
-	protected void enterText(WebElement element) {
+	protected void clearText(WebElement element) {
 		waitForElementToBeVisible(element, DEFAULT_WAIT_TIMEOUT);
 		try {
 			element.clear();
 		} catch (Exception e) {
 			logger.error("!!!!!!!ERROR in clearing the element\n" + e.getMessage());
+			throw new TestException(String.format("The text was not cleared for element : [%s]", element));
 		}
 	}
 
@@ -172,11 +175,12 @@ public class BasePageBrowser {
 	 * @Param String textToBeEntered
 	 */
 	protected void enterText(WebElement element, String textToBeEntered) {
-		waitForElementToBeVisible(element, DEFAULT_WAIT_TIMEOUT);
+		clearText(element);
 		try {
 			element.sendKeys(textToBeEntered);
 		} catch (Exception e) {
 			logger.error("!!!!!!!ERROR in sending text to the element\n" + e.getMessage());
+			throw new TestException(String.format("The text was not sent to element : [%s]", element));
 		}
 	}
 
@@ -192,6 +196,8 @@ public class BasePageBrowser {
 			jsExecutor.executeScript("arguments[0].click();", element);
 		} catch (Exception e) {
 			logger.error("!!!!!!!ERROR Element is not clickable using JavascriptExecutor\n" + e.getMessage());
+			throw new TestException(
+					String.format("The element is not clickable using JavascriptExecutor : [%s]", element));
 		}
 	}
 
