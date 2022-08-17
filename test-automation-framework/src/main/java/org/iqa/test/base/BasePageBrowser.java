@@ -34,18 +34,24 @@ public class BasePageBrowser {
 	private static final int DEFAULT_WAIT_TIMEOUT = 30;
 
 	public BasePageBrowser() {
-		driver = WebDriverFactory.getDriver();
-		fluentwait = getFluentWaitTimeout();
-		softAssert = new SoftAssert();
-		AssertionFactory.setSoftAssert(softAssert);
+		try {
+			driver = WebDriverFactory.getDriver();
+			fluentwait = getFluentWaitTimeout();
+			softAssert = new SoftAssert();
+			AssertionFactory.setSoftAssert(softAssert);
+			PageFactory.initElements(driver, this);
+			runTimeTestData = RuntimeTestDataHolder.getRunTimeTestData();
+		} catch (Exception e) {
+			logger.error(
+					"!!!!!!!!!ERROR WebDriver driver found as NULL. Please check if AUT property is correctly set as UI for Web Automation in properties. Exiting...");
+			System.exit(-1);
+		}
 
-		PageFactory.initElements(driver, this);
-		runTimeTestData = RuntimeTestDataHolder.getRunTimeTestData();
 	}
 
 	public Wait<WebDriver> getFluentWaitTimeout() {
-		return new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(DEFAULT_WAIT_TIMEOUT)).pollingEvery(Duration.ofSeconds(1))
-				.ignoring(NoSuchElementException.class);
+		return new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(DEFAULT_WAIT_TIMEOUT))
+				.pollingEvery(Duration.ofSeconds(1)).ignoring(NoSuchElementException.class);
 	}
 
 	public String getRunTimeTestData(String key) {
