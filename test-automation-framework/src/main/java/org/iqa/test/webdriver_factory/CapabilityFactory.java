@@ -5,15 +5,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-
 import org.iqa.suite.commons.PropertyHolder;
-import org.iqa.suite.commons.listeners.SeleniumMethodInvocationListener;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class CapabilityFactory {
-	private static final Logger logger = LoggerFactory.getLogger(SeleniumMethodInvocationListener.class);
+	private static final Logger logger = LoggerFactory.getLogger(CapabilityFactory.class);
 
 	private static DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
 

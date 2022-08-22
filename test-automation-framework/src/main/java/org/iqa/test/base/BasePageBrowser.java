@@ -3,7 +3,6 @@ package org.iqa.test.base;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
-import org.iqa.suite.commons.AssertionFactory;
 import org.iqa.suite.commons.ExtentLogger;
 import org.iqa.suite.commons.applitool.ApplitoolEyesWeb;
 import org.iqa.test.test_data.RuntimeTestDataHolder;
@@ -18,12 +17,10 @@ import org.openqa.selenium.support.ui.Wait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.TestException;
-import org.testng.asserts.SoftAssert;
 import com.applitools.eyes.selenium.Eyes;
 
 public class BasePageBrowser {
 
-	protected SoftAssert softAssert;
 	protected Wait<WebDriver> fluentwait;
 	protected WebDriver driver;
 	protected ExtentLogger extentLogger = new ExtentLogger();
@@ -36,8 +33,6 @@ public class BasePageBrowser {
 		try {
 			driver = WebDriverFactory.getDriver();
 			fluentwait = getFluentWaitTimeout();
-			softAssert = new SoftAssert();
-			AssertionFactory.setSoftAssert(softAssert);
 			PageFactory.initElements(driver, this);
 			runTimeTestData = RuntimeTestDataHolder.getRunTimeTestData();
 		} catch (Exception e) {

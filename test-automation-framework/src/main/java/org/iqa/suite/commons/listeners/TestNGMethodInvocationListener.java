@@ -3,6 +3,7 @@ package org.iqa.suite.commons.listeners;
 import java.net.MalformedURLException;
 import java.util.HashMap;
 
+import org.iqa.suite.commons.AssertionFactory;
 import org.iqa.suite.commons.PropertyHolder;
 import org.iqa.suite.commons.SeleniumUtils;
 import org.iqa.suite.commons.TestMetaData;
@@ -17,9 +18,11 @@ import org.slf4j.LoggerFactory;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestResult;
+import org.testng.asserts.SoftAssert;
 
-public class SeleniumMethodInvocationListener implements IInvokedMethodListener {
-	private static final Logger logger = LoggerFactory.getLogger(SeleniumMethodInvocationListener.class);
+public class TestNGMethodInvocationListener implements IInvokedMethodListener {
+	private static final Logger logger = LoggerFactory.getLogger(TestNGMethodInvocationListener.class);
+	private SoftAssert softAssert;
 
 	public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
 		logger.info("******** In before invocation");
@@ -37,6 +40,8 @@ public class SeleniumMethodInvocationListener implements IInvokedMethodListener 
 					e.printStackTrace();
 				}
 			}
+			softAssert = new SoftAssert();
+			AssertionFactory.setSoftAssert(softAssert);
 			RuntimeTestDataHolder.setRunTimeTestData(new HashMap<String, String>());
 			logger.info("********RuntimeTestDataHolder initialized.");
 			TestMetaData.initialize();

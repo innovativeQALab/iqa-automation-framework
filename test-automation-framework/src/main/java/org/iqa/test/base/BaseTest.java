@@ -4,7 +4,7 @@ import org.iqa.suite.commons.PropertyHolder;
 import org.iqa.suite.commons.TestMetaData;
 import org.iqa.suite.commons.applitool.ApplitoolEyesMobile;
 import org.iqa.suite.commons.applitool.ApplitoolEyesWeb;
-import org.iqa.suite.commons.listeners.SeleniumMethodInvocationListener;
+import org.iqa.suite.commons.listeners.TestNGMethodInvocationListener;
 import org.iqa.suite.commons.reporting.ExtentReportTestFactory;
 import org.iqa.test.webdriver_factory.WebDriverFactory;
 import org.slf4j.Logger;
@@ -21,7 +21,7 @@ import io.cucumber.testng.FeatureWrapper;
 import io.cucumber.testng.PickleWrapper;
 import io.cucumber.testng.TestNGCucumberRunner;
 
-@Listeners(SeleniumMethodInvocationListener.class)
+@Listeners(TestNGMethodInvocationListener.class)
 public class BaseTest {
 
 	public TestNGCucumberRunner cucumberRunner;

@@ -2,9 +2,7 @@ package org.iqa.test.webdriver_factory;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-
 import org.iqa.suite.commons.PropertyHolder;
-import org.iqa.suite.commons.listeners.SeleniumMethodInvocationListener;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -18,7 +16,7 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 
 public class WebDriverManager {
-	private static final Logger logger = LoggerFactory.getLogger(SeleniumMethodInvocationListener.class);
+	private static final Logger logger = LoggerFactory.getLogger(WebDriverManager.class);
 
 	synchronized public static WebDriver CreateInstance() throws MalformedURLException {
 		WebDriver dr = null;
