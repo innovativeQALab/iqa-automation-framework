@@ -20,10 +20,11 @@ public class SequentialTestRunner extends BaseTest{
 	 public void runScenarios(PickleWrapper pickleWrapper, FeatureWrapper featureWrapper) throws Throwable
 	 {
 		 logger.info("********** Scenario execution begins : "+pickleWrapper.toString());
+		 TestMetaData.setFeatureWrapper(featureWrapper);
+		 TestMetaData.setPickleWrapper(pickleWrapper);
 		 ExtentReportTestFactory.createNewTest(featureWrapper.toString(),pickleWrapper.toString());
 		 ExtentReportTestFactory.assignTestCategories(pickleWrapper.getPickle().getTags());
 		 TestMetaData.setTestTags(pickleWrapper.getPickle().getTags());
-		 openApplitoolEye( pickleWrapper,  featureWrapper);
 		 cucumberRunner.runScenario(pickleWrapper.getPickle());
 		 AssertionFactory.getSoftAssert().assertAll();
 		 logger.info("********** Scenario execution commpleted: "+pickleWrapper.toString());
