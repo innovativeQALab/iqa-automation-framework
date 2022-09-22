@@ -134,8 +134,7 @@ public class BaseTest {
 							.equalsIgnoreCase("WINDOWS")) {
 				ApplitoolEyesWeb.createEyes().open(WebDriverFactory.getDriver(), featureWrapper.toString(),
 						pickleWrapper.toString() + ":"
-								+ PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toLowerCase(),
-						new RectangleSize(1024, 751));
+								+ PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toLowerCase());//,new RectangleSize(1024, 751));
 			} else if (PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString()
 					.equalsIgnoreCase("ANDROID")
 					|| PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString()
