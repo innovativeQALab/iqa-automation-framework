@@ -32,7 +32,7 @@
 		<dependency>
 			<groupId>io.github.innovativeqalab</groupId>
 			<artifactId>test-automation-framework</artifactId>
-			<version>0.2.1</version>
+			<version>0.2.3</version>
 		</dependency>
 	</dependencies>
 
