@@ -32,8 +32,6 @@ public class TestNGMethodInvocationListener implements IInvokedMethodListener {
 					&& !PropertyHolder.testSuiteConfigurationProperties.get("AUT").toString().equalsIgnoreCase("API")) {
 				try {
 					WebDriverFactory.setDriver(WebDriverManager.CreateInstance());
-					WebDriverFactory.getDriver().manage().window().maximize();
-
 					logger.info("******** Driver object and test report instance created successfully");
 				} catch (MalformedURLException e) {
 					logger.error("!!!!!!!! Exception while creating Driver object and test report instance ");
