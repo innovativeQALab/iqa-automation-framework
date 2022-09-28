@@ -27,17 +27,42 @@ public class TestNGMethodInvocationListener implements IInvokedMethodListener {
 	public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
 		logger.info("******** In before invocation");
 		if (method.isTestMethod()) {
-			logger.info("******** In before invocation");
-			if (null != PropertyHolder.testSuiteConfigurationProperties.get("AUT")
-					&& !PropertyHolder.testSuiteConfigurationProperties.get("AUT").toString().equalsIgnoreCase("API")) {
+			String AUT = PropertyHolder.testSuiteConfigurationProperties.get("AUT").toString().toUpperCase();
+			if (AUT == null) {
+				logger.error(
+						"!!!!!!!! AUT property is null. Please add AUT property in Environment.properties file with one of the values from [WEB/MOBILE/API_ONLY]. Exiting...");
+				System.exit(-1);
+			}
+			logger.info("********* AUT[Application under Test] property value is : " + AUT);
+			// Added switch case for AUT[Application under Test]
+			switch (AUT) {
+			case "WEB":
+			case "UI+API":
 				try {
 					WebDriverFactory.setDriver(WebDriverManager.CreateInstance());
-					logger.info("******** Driver object and test report instance created successfully");
+					WebDriverFactory.getDriver().manage().window().maximize();
 				} catch (MalformedURLException e) {
-					logger.error("!!!!!!!! Exception while creating Driver object and test report instance ");
+					logger.error("!!!!!!!! Exception occured while creating Driver object and test report instance ");
 					e.printStackTrace();
 				}
+				break;
+			case "MOBILE":
+				try {
+					WebDriverFactory.setDriver(WebDriverManager.CreateInstance());
+				} catch (MalformedURLException e) {
+					logger.error(
+							"!!!!!!!! Exception occured while creating AppiumDriver object and test report instance");
+					e.printStackTrace();
+				}
+				break;
+			case "API_ONLY":
+				break;
+				
+			default:
+				logger.error("!!!!!!!! AUT property should have values from [WEB/MOBILE/API_ONLY]. Exiting...");
+				break;
 			}
+
 			softAssert = new SoftAssert();
 			AssertionFactory.setSoftAssert(softAssert);
 			RuntimeTestDataHolder.setRunTimeTestData(new HashMap<String, String>());
@@ -51,7 +76,7 @@ public class TestNGMethodInvocationListener implements IInvokedMethodListener {
 	public void afterInvocation(IInvokedMethod method, ITestResult testResult) {
 		if (method.isTestMethod()) {
 			logger.info("******** In after invocation");
-			logger.info("******** In after invocation - Test Case Status " + testResult.isSuccess());
+			logger.info("******** Test Case Status " + testResult.isSuccess());
 			if (null != PropertyHolder.testSuiteConfigurationProperties.get("AUT")
 					&& !PropertyHolder.testSuiteConfigurationProperties.get("AUT").toString().equalsIgnoreCase("API")) {
 				if (!testResult.isSuccess()) {
