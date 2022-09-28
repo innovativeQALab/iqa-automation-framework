@@ -113,7 +113,7 @@ public class BaseTest {
 							.equalsIgnoreCase("IOS")) {
 				System.out.println("********** Opening Applitool Eyes for Mobile");
 				ApplitoolEyesMobile.enabled = true;
-				ApplitoolEyesMobile.setApplitoolCongfig(System.getenv("APPLITOOLS_API_KEY"));
+				ApplitoolEyesMobile.setApplitoolCongfig(PropertyHolder.testSuiteConfigurationProperties.getProperty("APPLITOOLS_API_KEY").toString());
 				logger.info("Applitool configuration setup done...");
 				System.out.println("Applitool configuration setup done...");
 			} else {
