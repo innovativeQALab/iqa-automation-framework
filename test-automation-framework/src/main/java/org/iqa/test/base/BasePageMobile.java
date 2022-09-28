@@ -38,7 +38,6 @@ public class BasePageMobile {
 	@SuppressWarnings("rawtypes")
 	public BasePageMobile() {
 		try {
-			logger.info("*******In BasePageMobile");
 			driver = (AppiumDriver) WebDriverFactory.getDriver();
 			fluentwait = getFluentWaitTimeout();
 			PageFactory.initElements(new AppiumFieldDecorator(driver), this);
