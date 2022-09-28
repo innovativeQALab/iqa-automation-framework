@@ -25,6 +25,7 @@ public class SequentialTestRunner extends BaseTest{
 		 ExtentReportTestFactory.createNewTest(featureWrapper.toString(),pickleWrapper.toString());
 		 ExtentReportTestFactory.assignTestCategories(pickleWrapper.getPickle().getTags());
 		 TestMetaData.setTestTags(pickleWrapper.getPickle().getTags());
+		 openApplitoolEye( pickleWrapper,  featureWrapper);
 		 cucumberRunner.runScenario(pickleWrapper.getPickle());
 		 AssertionFactory.getSoftAssert().assertAll();
 		 logger.info("********** Scenario execution commpleted: "+pickleWrapper.toString());
