@@ -27,7 +27,7 @@ public class TestNGMethodInvocationListener implements IInvokedMethodListener {
 	public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
 		logger.info("******** In before invocation");
 		if (method.isTestMethod()) {
-			String AUT = PropertyHolder.testSuiteConfigurationProperties.get("AUT").toString().toUpperCase();
+			String AUT = PropertyHolder.testSuiteConfigurationProperties.getProperty("AUT").toString().toUpperCase();
 			if (AUT == null) {
 				logger.error(
 						"!!!!!!!! AUT property is null. Please add AUT property in Environment.properties file with one of the values from [WEB/MOBILE/API_ONLY]. Exiting...");
