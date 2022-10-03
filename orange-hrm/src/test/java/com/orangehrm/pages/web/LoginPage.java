@@ -14,21 +14,26 @@ public class LoginPage extends BasePageBrowser{
 	private static final Logger logger = LoggerFactory.getLogger(LoginPage.class);
 
 	
-	@FindBy(xpath="//input[@id='txtUsername']")	
+	@FindBy(xpath="//input[@name='username']")	
 	private WebElement userName;	
 	
-	@FindBy(xpath="//input[@id='txtPassword']")
+	@FindBy(xpath="//input[@name='password']")
 	private WebElement password;
 	
-	@FindBy(xpath="//*[@id='btnLogin']")
+	@FindBy(xpath="//*[@type='submit']")
 	private WebElement loginButton;
+	
+	@FindBy(xpath="//span[normalize-space()='Admin']")
+	private WebElement adminTab;
 	
 	
 	
 	public LoginPage navigateToOrangeHrmApplication()
 	{
 		String ENVIRONMENT = PropertyHolder.testSuiteConfigurationProperties.getProperty("ENVIRONMENT");
+		driver.manage().window().maximize();
 		driver.get(PropertyHolder.testSuiteConfigurationProperties.getProperty(ENVIRONMENT+"_URL"));
+		logger.info("======== Window size : "+driver.manage().window().getSize());
 		
 		
 		try {
