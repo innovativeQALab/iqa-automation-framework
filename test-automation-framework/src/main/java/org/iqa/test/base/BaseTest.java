@@ -11,41 +11,28 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
 import com.applitools.eyes.RectangleSize;
 import com.applitools.eyes.TestResultsSummary;
+import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.FeatureWrapper;
 import io.cucumber.testng.PickleWrapper;
 import io.cucumber.testng.TestNGCucumberRunner;
 
-@Listeners(TestNGMethodInvocationListener.class)
-public class BaseTest {
+@Listeners({ TestNGMethodInvocationListener.class })
+//ExtentITestListenerClassAdapter.class
 
-	public TestNGCucumberRunner cucumberRunner;
+public class BaseTest extends AbstractTestNGCucumberTests {
 
 	private static final Logger logger = LoggerFactory.getLogger(BaseTest.class);
 
-	@AfterClass(alwaysRun = true)
-	public void afterClass() {
-		cucumberRunner.finish(); // Close used instances and print cucumber summary of execution. Ex. missing
-									// step definitions
-	}
-
-	@Parameters({ "featureFilePath", "glueCodePackageName", "tagsToExecute" })
 	@BeforeSuite
-	public void beforeSuite(String featureFilePath, String glueCodePackageName, String tagsToExecute) {
+	public void beforeSuite() {
 
-		String tagToIncludeCommandOption = tagsToExecute.trim() != "" && tagsToExecute != null
-				? " --tags \"" + tagsToExecute + "\""
-				: "";
-		System.setProperty("cucumber.options",
-				featureFilePath + " --glue " + glueCodePackageName + " " + tagToIncludeCommandOption);
-		logger.info("********* Cucumber Options set as :" + featureFilePath + " --glue " + glueCodePackageName + " "
-				+ tagToIncludeCommandOption);
-		cucumberRunner = new TestNGCucumberRunner(this.getClass());
 		logger.info("TestNGCucumberRunner object initialization completed.");
 
 		PropertyHolder.loadGeneralConfig();
@@ -74,20 +61,10 @@ public class BaseTest {
 
 	}
 
-	@DataProvider(name = "cucumber-examples-parallel", parallel = true)
-	public Object[][] dataProviderParallel() {
-		return getCucumberScenarios();
-	}
-
-	@DataProvider(name = "cucumber-examples-sequential", parallel = false)
-	public Object[][] dataProviderSequencrial() {
-		return getCucumberScenarios();
-	}
-
-	private Object[][] getCucumberScenarios() {
+	public Object[][] scenarios() {
 		Object[][] cucumberScenarios = null;
 		try {
-			cucumberScenarios = cucumberRunner.provideScenarios();
+			cucumberScenarios = super.scenarios();
 		} catch (Exception e) {
 			logger.error("!!!!!!!!!!!!ERROR Please check feature file if there are any lexical errors!!!");
 		}
@@ -133,8 +110,8 @@ public class BaseTest {
 					|| PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString()
 							.equalsIgnoreCase("WINDOWS")) {
 				ApplitoolEyesWeb.createEyes().open(WebDriverFactory.getDriver(), featureWrapper.toString(),
-						pickleWrapper.toString() + ":"
-								+ PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toLowerCase());//,new RectangleSize(1024, 751));
+						pickleWrapper.toString() + ":" + PropertyHolder.testSuiteConfigurationProperties
+								.getProperty("platform").toLowerCase());// ,new RectangleSize(1024, 751));
 			} else if (PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString()
 					.equalsIgnoreCase("ANDROID")
 					|| PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString()

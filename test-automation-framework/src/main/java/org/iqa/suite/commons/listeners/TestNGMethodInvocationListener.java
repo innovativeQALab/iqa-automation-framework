@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 import org.iqa.suite.commons.AssertionFactory;
 import org.iqa.suite.commons.PropertyHolder;
-import org.iqa.suite.commons.SeleniumUtils;
 import org.iqa.suite.commons.TestMetaData;
 import org.iqa.suite.commons.applitool.ApplitoolEyesMobile;
 import org.iqa.suite.commons.applitool.ApplitoolEyesWeb;
@@ -19,6 +18,9 @@ import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestResult;
 import org.testng.asserts.SoftAssert;
+
+import com.aventstack.extentreports.MediaEntityBuilder;
+
 
 public class TestNGMethodInvocationListener implements IInvokedMethodListener {
 	private static final Logger logger = LoggerFactory.getLogger(TestNGMethodInvocationListener.class);
@@ -54,17 +56,28 @@ public class TestNGMethodInvocationListener implements IInvokedMethodListener {
 		if (method.isTestMethod()) {
 			logger.info("******** In after invocation");
 			logger.info("******** In after invocation - Test Case Status " + testResult.isSuccess());
-			if (null != PropertyHolder.testSuiteConfigurationProperties.get("AUT")
-					&& !PropertyHolder.testSuiteConfigurationProperties.get("AUT").toString().equalsIgnoreCase("API")) {
-				if (!testResult.isSuccess()) {
-					ExtentReportTestFactory.getTest().fail(testResult.getThrowable());
-					ExtentReportTestFactory.getTest()
-							.addScreenCaptureFromBase64String(SeleniumUtils.getScreenshotAsBase64());
-					logger.debug("******** Screenshot attached to extent report");
+			try {
+				if (null != PropertyHolder.testSuiteConfigurationProperties.get("AUT")
+						&& !PropertyHolder.testSuiteConfigurationProperties.get("AUT").toString()
+								.equalsIgnoreCase("API")) {
+					if (!testResult.isSuccess()) {
+						// ExtentReportTestFactory.getTest().fail(testResult.getThrowable());
+						//ExtentReportTestFactory.getTest()
+						//		.addScreenCaptureFromBase64String(SeleniumUtils.getScreenshotAsBase64());
+		//				ExtentCucumberAdapter.addTestStepLog("FAILED");
+					//	ExtentTestManager.getTest(result).fail("ITestResult.FAILURE, event afterMethod",
+		          //              MediaEntityBuilder.createScreenCaptureFromPath("/Users/vzodge/Downloads/BKP/ShivajiMaharaj.png").build());
+	//					ExtentReportTestFactory.getTest().addScreenCaptureFromPath("/Users/prashantbhange/Documents/iqa_git_repo/iqa-automation-framework/orange-hrm/src/test/resources/img_03102022_142133.png");
+		//				ExtentReportTestFactory.getTest().info(MediaEntityBuilder.createScreenCaptureFromPath("/Users/prashantbhange/Documents/iqa_git_repo/iqa-automation-framework/orange-hrm/src/test/resources/img_03102022_142133.png").build());
+//						ExtentCucumberAdapter.addTestStepScreenCaptureFromPath(SeleniumUtils.getBase64Screenshot());
+//						ExtentCucumberAdapter.addTestStepScreenCaptureFromPath(SeleniumUtils.getScreenshotAsBase64());
+						logger.debug("******** Screenshot attached to extent report");
+					}
 				}
-				WebDriverFactory.getDriver().quit();
-				closeApplitoolEye();
+			} catch (Exception e) {
 			}
+			WebDriverFactory.getDriver().quit();
+			closeApplitoolEye();
 		}
 	}
 
