@@ -61,7 +61,7 @@ public class TestNGMethodInvocationListener implements IInvokedMethodListener {
 								.equalsIgnoreCase("API")) {
 					if (!testResult.isSuccess()) {						
 						ExtentCucumberAdapter.getCurrentStep().log(Status.FAIL, MediaEntityBuilder
-								.createScreenCaptureFromPath(SeleniumUtils.getScreenshotAsBase64()).build());
+								.createScreenCaptureFromBase64String(SeleniumUtils.getScreenshotAsBase64()).build());
 						logger.debug("******** Screenshot attached to extent report");
 					}
 				}
