@@ -54,12 +54,9 @@ public class WebDriverManager {
 							new URL(PropertyHolder.testSuiteConfigurationProperties.getProperty("hubUrl").toString()),
 							CapabilityFactory.getDesiredCapabilities());
 				else
-					//dr = new RemoteWebDriver(
-							//new URL(PropertyHolder.testSuiteConfigurationProperties.getProperty("hubUrl").toString()),
-							//CapabilityFactory.getDesiredCapabilities());
-					 dr = new RemoteWebDriver(
-							 new URL(PropertyHolder.testSuiteConfigurationProperties.getProperty("hubUrl").toString()),
-							 ChromeOptionsFactory.getChromeOptionsArguments());
+					dr = new RemoteWebDriver(
+							new URL(PropertyHolder.testSuiteConfigurationProperties.getProperty("hubUrl").toString()),
+							CapabilityFactory.getDesiredCapabilities());
 
 				logger.info("****** After Webdriver object creation");
 

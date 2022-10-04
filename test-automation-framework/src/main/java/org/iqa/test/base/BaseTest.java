@@ -9,23 +9,15 @@ import org.iqa.suite.commons.reporting.ExtentReportTestFactory;
 import org.iqa.test.webdriver_factory.WebDriverFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
-import org.testng.annotations.Parameters;
-import com.applitools.eyes.RectangleSize;
 import com.applitools.eyes.TestResultsSummary;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.FeatureWrapper;
 import io.cucumber.testng.PickleWrapper;
-import io.cucumber.testng.TestNGCucumberRunner;
 
-@Listeners({ TestNGMethodInvocationListener.class })
-//ExtentITestListenerClassAdapter.class
-
+@Listeners(TestNGMethodInvocationListener.class)
 public class BaseTest extends AbstractTestNGCucumberTests {
 
 	private static final Logger logger = LoggerFactory.getLogger(BaseTest.class);
