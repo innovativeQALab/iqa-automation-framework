@@ -26,12 +26,21 @@ public class BaseTest extends AbstractTestNGCucumberTests {
 	public void beforeSuite() {
 
 		logger.info("TestNGCucumberRunner object initialization completed.");
-
+		PropertyHolder.loadWebDriverConfig();
+		PropertyHolder.loadApplitoolConfig();
 		PropertyHolder.loadGeneralConfig();
-		if (null != PropertyHolder.testSuiteConfigurationProperties.get("AUT")
-				&& !PropertyHolder.testSuiteConfigurationProperties.get("AUT").toString().equalsIgnoreCase("API")) {
-			PropertyHolder.loadWebDriverConfig();
-			PropertyHolder.loadApplitoolConfig();
+		
+		if( null==PropertyHolder.testSuiteConfigurationProperties.getProperty("AUT"))
+		{
+			logger.error("!!!!!!!!!! AUT Property must set in src/test/resources/properties/framework/WebDriverConfig.properties"
+					+ "\n Property name should be AUT and values should be one of {WEB, MOBILE, API_ONLY.}"
+					+ "WEB and MOBILE will allow to execute API Reuquests."
+					+ "\n API_ONLY must be used if test suite contains only API tests}");
+		}
+		
+		if (!PropertyHolder.testSuiteConfigurationProperties.getProperty("AUT").toString().equalsIgnoreCase("API_ONLY")) {
+			
+			logger.info("****** Loading applitool config");
 			this.setApplitoolEyeConfig();
 		}
 	}
