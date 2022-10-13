@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Api-Cucumber-Test" parallel="methods" data-provider-thread-count="5" >
-	<parameter name="cucumber.filter.tags" value="" /> 
+	<parameter name="cucumber.filter.tags" value="@Api" /> 
  	<parameter name="cucumber.features" value="classpath:feature/Api.feature"/>	
  	<parameter name="cucumber.plugin" value="pretty, html:target/cucumber-reports/cucumber.html,com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"/>
 	<parameter name="cucumber.glue" value="com.orangehrm.step_def.api"/>
