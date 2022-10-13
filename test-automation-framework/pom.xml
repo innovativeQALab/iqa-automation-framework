@@ -30,7 +30,7 @@
 		<dependency>
 			<groupId>tech.grasshopper</groupId>
 			<artifactId>extentreports-cucumber7-adapter</artifactId>
-			<version>1.2.0</version>
+			<version>1.7.0</version>
 		</dependency>
 			<dependency>
 			<groupId>io.rest-assured</groupId>
