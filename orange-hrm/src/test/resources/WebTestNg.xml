@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Selenium-Cucumber-Test" parallel="methods" data-provider-thread-count="5" >
-		 <parameter name="cucumber.filter.tags" value="@Login" /> 
- 		<parameter name="cucumber.features" value="classpath:org/iqa/test/runner/features"/> 	
- 		<parameter name="cucumber.plugin" value="pretty, html:target/cucumber-reports/cucumber.html,com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"/>
-		<parameter name="cucumber.glue" value="com.orangehrm.step_def.web"/>
-		<!--<parameter name="cucumber.plugin" value="pretty, html:target/cucumber-reports/cucumber.html, org.iqa.suite.commons.listeners.CucumberEventListener"/>-->
-  <test name="Test">
-   
-    <classes>
-      <class name="org.iqa.test.runner.ParallelTestRunner"/>  <!--  Mandatory : Test Runner file
-      	For Sequential Run - user org.iqa.test.runner.SequentialTestRunner
-      	For Parallel Run org.iqa.test.runner.ParallelTestRunner
-       -->
-    </classes>
-  </test>
-</suite> 
-<!-- xWARNING: No features found at classpath:/src/test/resources/org/iqa/test/runner/features -->
+	<parameter name="cucumber.filter.tags" value="" /> 
+ 	<parameter name="cucumber.features" value="classpath:feature"/>	
+ 	<parameter name="cucumber.plugin" value="pretty, html:target/cucumber-reports/cucumber.html,com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"/>
+	<parameter name="cucumber.glue" value="com.orangehrm.step_def.web"/>
+    <test name="Test">  
+   		 <classes>
+     		 <class name="org.iqa.test.runner.ParallelTestRunner"/>  <!--  Mandatory : Test Runner file
+      			For Sequential Run - user org.iqa.test.runner.SequentialTestRunner
+      			For Parallel Run org.iqa.test.runner.ParallelTestRunner
+       		-->
+    	</classes>
+    </test>
+</suite>
