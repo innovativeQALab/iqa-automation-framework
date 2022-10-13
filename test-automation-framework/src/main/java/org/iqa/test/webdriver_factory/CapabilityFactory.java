@@ -16,55 +16,56 @@ public class CapabilityFactory {
 	private static DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
 
 	static {
-		System.out.println("*********** Static block start. Platform - " + PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString());
+		logger.debug("*********** Static block start. Platform - "
+				+ PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString());
 		switch (PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString()) {
 		case "ANDROID":
-			System.out.println("*********** ANDROIF IN");
+			logger.debug("*********** ANDROIF IN");
 			fillCapabilities(getProperties("AndroidCapabilities.properties"));
-			System.out.println("*********** ANDROIF OUT");
+			logger.debug("*********** ANDROIF OUT");
 			break;
 		case "IOS":
-			System.out.println("*********** IOS IN");
+			logger.debug("*********** IOS IN");
 			fillCapabilities(getProperties("iOSCapabilities.properties"));
-			System.out.println("*********** IOS OUT");
+			logger.debug("*********** IOS OUT");
 			break;
 		default:
-			System.out.println("*********** BROWSER IN");
+			logger.debug("*********** BROWSER IN");
 			fillCapabilities(getProperties("BrowserCapabilities.properties"));
-			System.out.println("*********** BROWSER OUT");
+			logger.debug("*********** BROWSER OUT");
 			break;
 		}
 
-		System.out.println("*********** Static block end");
+		logger.debug("*********** Static block end");
 	}
 
 	public static DesiredCapabilities getDesiredCapabilities() {
-		System.out.println("*********** Called get desiredCapabilities()");
 
 		if (null == desiredCapabilities) {
 			logger.error("!!!!!!!!!!!  Desired capability found null");
-			System.out.println("!!!!!!!!!!!  Desired capability found null");
 		}
-		desiredCapabilities.asMap()
-				.forEach((k, v) -> System.out.println("************* Capabilities " + k + " - " + v));
-
+		logger.info("********************************************************************");
+		logger.info("*********** DesiredCapabilities being set as:                      ");
+		desiredCapabilities.asMap().forEach((key, value) -> logger.info(key + " - " + value));
+		logger.info("********************************************************************");
 		return desiredCapabilities;
 	}
 
 	private static void fillCapabilities(Properties properties) {
-		System.out.println("fillCapabilities IN - "+properties.toString());
-		// Consider capablities present in testSuiteConfiguration else use from property file. This is useful to pass browserName or version or package from Environment or as Parameter
-		properties.forEach((k, v) ->desiredCapabilities
-				.setCapability(
-						k.toString(), 
-						null!=PropertyHolder.testSuiteConfigurationProperties.getProperty(k.toString())?PropertyHolder.testSuiteConfigurationProperties.getProperty(k.toString()):v.toString())
-						);
+		logger.debug("fillCapabilities IN - " + properties.toString());
+		// Consider capablities present in testSuiteConfiguration else use from property
+		// file. This is useful to pass browserName or version or package from
+		// Environment or as Parameter
+		properties.forEach((k, v) -> desiredCapabilities.setCapability(k.toString(),
+				null != PropertyHolder.testSuiteConfigurationProperties.getProperty(k.toString())
+						? PropertyHolder.testSuiteConfigurationProperties.getProperty(k.toString())
+						: v.toString()));
 
-		System.out.println("fillCapabilities OUT - "+properties.toString());
+		logger.debug("fillCapabilities OUT - " + properties.toString());
 	}
 
 	private static Properties getProperties(String propertyFileName) {
-		System.out.println("getProperties IN - "+propertyFileName);
+		logger.debug("getProperties IN - " + propertyFileName);
 		InputStream input;
 		Properties properties = new Properties();
 		try {
@@ -72,19 +73,17 @@ public class CapabilityFactory {
 			properties = new Properties();
 			properties.load(input);
 		} catch (FileNotFoundException e) {
-			System.out
-					.println("!!!!! Unable to laoad property file at location src/test/resources/properties/capabilities/"
-							+ propertyFileName);
+			logger.error("!!!!! Unable to laoad property file at location src/test/resources/properties/capabilities/"
+					+ propertyFileName);
 			e.printStackTrace();
 			System.exit(-1);
 		} catch (IOException e) {
-			System.out
-					.println("!!!!! Unable to laoad property file at location src/test/resources/properties/capabilities/"
-							+ propertyFileName + " \n Please check content of property file and try again.");
+			logger.error("!!!!! Unable to laoad property file at location src/test/resources/properties/capabilities/"
+					+ propertyFileName + " \n Please check content of property file and try again.");
 			e.printStackTrace();
 			System.exit(-1);
 		}
-		System.out.println("getProperties OUT - "+propertyFileName);
+		logger.debug("getProperties OUT - " + propertyFileName);
 		return properties;
 	}
 

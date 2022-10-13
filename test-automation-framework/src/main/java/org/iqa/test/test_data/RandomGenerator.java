@@ -45,7 +45,7 @@ public class RandomGenerator {
 	}
 
 	/**
-	 * Generate random string with user provided prefix
+	 * Generate random number with user provided prefix
 	 *
 	 * @param int numberOfDigit
 	 * @return String randomValue

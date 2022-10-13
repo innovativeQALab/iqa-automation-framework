@@ -15,55 +15,50 @@ import com.applitools.eyes.visualgrid.services.RunnerOptions;
 import com.applitools.eyes.visualgrid.services.VisualGridRunner;
 
 public class ApplitoolEyesWeb {
-	
-	private static final VisualGridRunner runner =new VisualGridRunner(new RunnerOptions().testConcurrency(20));
-	private static ThreadLocal<Eyes> eyes = new ThreadLocal<>();
-	private static Configuration config ;
-	public static boolean enabled=false;
-	
-    private static final Logger logger = LoggerFactory.getLogger(ApplitoolEyesWeb.class);
 
-	
+	private static final VisualGridRunner runner = new VisualGridRunner(new RunnerOptions().testConcurrency(20));
+	private static ThreadLocal<Eyes> eyes = new ThreadLocal<>();
+	private static Configuration config;
+	public static boolean enabled = false;
+	private static final Logger logger = LoggerFactory.getLogger(ApplitoolEyesWeb.class);
+
 	private static void createApplitoolEyeConfig() {
 		config = new Configuration();
 	}
-	
-	public static void setApplitoolCongfig(String applitoolApiKey)
-	{
-		
+
+	@SuppressWarnings("unchecked")
+	public static void setApplitoolCongfig(String applitoolApiKey) {
 		createApplitoolEyeConfig();
 		Reflections reflections;
-			reflections = new Reflections(PropertyHolder.testSuiteConfigurationProperties.getProperty("APPLITOOL_CONFIG_PACKAGE").toString());   
-
-			Set<Class<? extends IConfigListner>> classes = reflections.getSubTypesOf(IConfigListner.class);
-				Object[] arr = classes.toArray();
-				try {
-					((Class<? extends IConfigListner>)arr[0]).newInstance().getApplitoolConfig(config);
-				} catch (InstantiationException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-		
+		reflections = new Reflections(
+				PropertyHolder.testSuiteConfigurationProperties.getProperty("APPLITOOL_CONFIG_PACKAGE").toString());
+		Set<Class<? extends IConfigListner>> classes = reflections.getSubTypesOf(IConfigListner.class);
+		Object[] arr = classes.toArray();
+		try {
+			((Class<? extends IConfigListner>) arr[0]).newInstance().getApplitoolConfig(config);
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
 		config.setApiKey(applitoolApiKey);
-		config.setBatch(new BatchInfo(PropertyHolder.testSuiteConfigurationProperties.getProperty("BATCH_NAME").toString()));
-
+		config.setBatch(
+				new BatchInfo(PropertyHolder.testSuiteConfigurationProperties.getProperty("BATCH_NAME").toString()));
+		config.setHostOS(PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString());
 	}
 
-	public static EyesRunner getApplitoolEyeRunner()
-	{
+	public static EyesRunner getApplitoolEyeRunner() {
 		return runner;
 	}
+
 	public static Eyes getEyes() {
-		
-		if(!ApplitoolEyesWeb.enabled )
-		{
-			System.out.println("!!!!!!!!!! Applitool eye either disabled or not configured corrctly. Plase check Applitool configuration in src/test/resources/properties/framework/ApplitoolEyeConfig.proprtis");
-			logger.error("!!!!!!!!!! Applitool eye either disabled or not configured corrctly. Plase check Applitool configuration in src/test/resources/properties/framework/ApplitoolEyeConfig.proprtis");
-		}else {
-			
+
+		if (!ApplitoolEyesWeb.enabled) {
+			logger.info("!!!!!!!!!! Applitool eye either disabled or not configured corrctly."
+					+ "\n Please check Applitool configuration in src/test/resources/properties/framework/ApplitoolEyeConfig.proprtis");
+			logger.error("!!!!!!!!!! Applitool eye either disabled or not configured corrctly."
+					+ "\n Please check Applitool configuration in src/test/resources/properties/framework/ApplitoolEyeConfig.proprtis");
+		} else {
 		}
 		return eyes.get();
 	}
@@ -73,14 +68,11 @@ public class ApplitoolEyesWeb {
 	}
 
 	public static Eyes createEyes() {
-		if(ApplitoolEyesWeb.enabled )
-		{
-		eyes.set(new Eyes(runner));
-		eyes.get().setConfiguration(config);
+		if (ApplitoolEyesWeb.enabled) {
+			eyes.set(new Eyes(runner));
+			eyes.get().setConfiguration(config);
 		}
 		return eyes.get();
 	}
-			
-			
 
 }

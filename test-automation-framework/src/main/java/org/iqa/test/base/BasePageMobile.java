@@ -34,17 +34,10 @@ public class BasePageMobile {
 
 	@SuppressWarnings("rawtypes")
 	public BasePageMobile() {
-		try {
-			driver = (AppiumDriver) WebDriverFactory.getDriver();
-			fluentwait = getFluentWaitTimeout();
-			PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-			runTimeTestData = RuntimeTestDataHolder.getRunTimeTestData();
-		} catch (Exception e) {
-			logger.error(
-					"!!!!!!!!!ERROR AppiumDriver driver found as NULL. Please check if AUT property is correctly set as AUT=MOBILE in Environment.properties file. Exiting...");
-			System.exit(-1);
-		}
-
+		driver = (AppiumDriver) WebDriverFactory.getDriver();
+		fluentwait = getFluentWaitTimeout();
+		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+		runTimeTestData = RuntimeTestDataHolder.getRunTimeTestData();
 	}
 
 	/**
@@ -55,7 +48,7 @@ public class BasePageMobile {
 
 	@SuppressWarnings("rawtypes")
 	protected Wait<AppiumDriver> getFluentWaitTimeout() {
-		return new FluentWait<AppiumDriver>((AppiumDriver) driver) .withTimeout(Duration.ofSeconds(DEFAULT_WAIT_TIMEOUT))
+		return new FluentWait<AppiumDriver>((AppiumDriver) driver).withTimeout(Duration.ofSeconds(DEFAULT_WAIT_TIMEOUT))
 				.pollingEvery(Duration.ofSeconds(1)).ignoring(NoSuchElementException.class);
 	}
 
@@ -85,6 +78,5 @@ public class BasePageMobile {
 		}
 		runTimeTestData.put(key, value);
 	}
-	
 
 }

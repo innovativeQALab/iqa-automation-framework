@@ -20,6 +20,7 @@ public class WebDriverManager {
 
 	synchronized public static WebDriver CreateInstance() throws MalformedURLException {
 		WebDriver dr = null;
+		logger.info("********* Before Webdriver object creation");
 		try {
 			if (PropertyHolder.testSuiteConfigurationProperties.getProperty("DRIVER").toString().contains("BROWSER")) {
 				System.setProperty(PropertyHolder.testSuiteConfigurationProperties.getProperty("DRIVER_PROPERTY_NAME"),
@@ -37,11 +38,8 @@ public class WebDriverManager {
 					logger.error("!!!!!!!!!!Error - Browser Name is not found. Exiting...");
 					System.exit(-1);
 				}
-
 			} else if (PropertyHolder.testSuiteConfigurationProperties.getProperty("DRIVER").toString()
 					.contains("REMOTE")) {
-
-				logger.info("****** Before Webdriver object creation");
 
 				if (PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString()
 						.equalsIgnoreCase("Android"))
@@ -57,9 +55,6 @@ public class WebDriverManager {
 					dr = new RemoteWebDriver(
 							new URL(PropertyHolder.testSuiteConfigurationProperties.getProperty("hubUrl").toString()),
 							CapabilityFactory.getDesiredCapabilities());
-
-				logger.info("****** After Webdriver object creation");
-
 			} else {
 				logger.error("!!!!!!!!ERROR - Unable to create driver object");
 				System.exit(-1);
@@ -68,7 +63,7 @@ public class WebDriverManager {
 			logger.error("!!!!!!!!!!ERROR - Unable to create browser object. ");
 			e.printStackTrace();
 		}
-		logger.info("******** In after object creation");
+		logger.info("********* After Webdriver object creation");
 		return dr;
 	}
 }

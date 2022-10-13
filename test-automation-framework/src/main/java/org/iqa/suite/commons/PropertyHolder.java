@@ -22,14 +22,20 @@ public class PropertyHolder {
 		testSuiteConfigurationProperties.load(input);
 	}
 
-	public static void loadWebDriverConfig() {
+	public static void loadFrameworkConfig() {
 		try {
-			loadPropertyFile("src/test/resources/properties/framework/WebDriverConfig.properties");
-			logger.info("WebDriverConfig.properties loaded.");
+			loadPropertyFile("src/test/resources/properties/framework/FrameworkConfig.properties");
+			logger.debug("FrameworkConfig.properties loaded.");
 
+		} catch (FileNotFoundException e) {
+			logger.error("!!!!! FrameworkConfig.properties"
+					+ " file Not found. \n Please create FrameworkConfig.properties to start with execution at location  => src/test/resources/properties/framework/FrameworkConfig.properties.");
+			e.printStackTrace();
+			logger.error("Exiting ...");
+			System.exit(-1);
 		} catch (IOException e) {
 			logger.error(
-					"Error while loading property WebDriverConfig.properties file. \n Please check content of property file and try again.");
+					"!!!!!!Error while loading property FrameworkConfig.properties file. \n Please check content of property file and try again.");
 			e.printStackTrace();
 			System.exit(-1);
 		}
@@ -39,11 +45,16 @@ public class PropertyHolder {
 
 		try {
 			loadPropertyFile("src/test/resources/properties/framework/ApplitoolEyeConfig.properties");
-			logger.info("ApplitoolEyeConfig.properties");
-		} catch (IOException e) {
-
+			logger.debug("ApplitoolEyeConfig.properties");
+		}catch (FileNotFoundException e) {
+			logger.error("!!!!! ApplitoolEyeConfig.properties"
+					+ " file Not found. \n Please create ApplitoolEyeConfig.properties if you want to use Applitool at location  => src/test/resources/properties/framework/ApplitoolEyeConfig.properties.");
+			e.printStackTrace();
+			ApplitoolEyesWeb.enabled = false;
+		} 
+		catch (IOException e) {
 			logger.error(
-					"Applitool Config file not found. Please create config file if you want to use Applitool here.. src/test/resources/properties/framework/ApplitoolEyeConfig.properties");
+					"!!!!!!Error while loading property ApplitoolEyeConfig.properties file. \n Please check content of property file and try again.");
 			ApplitoolEyesWeb.enabled = false;
 
 		}
@@ -57,21 +68,13 @@ public class PropertyHolder {
 						"!!!!! Unexpected structure found : src/test/resources/properties/userDefined folder contain sub folders. It should contain only properties files. Load properties form sub folder is not yet implemented.");
 			} else {
 				try {
-//					input = new FileInputStream(file);
-//					Properties tempGeneralConfig = new Properties();
-//					tempGeneralConfig.load(input);
-//					generalProperties.putAll(tempGeneralConfig);
 					loadPropertyFile(file.getAbsolutePath());
 				} catch (FileNotFoundException e) {
 					logger.error("!!!!! " + file.getAbsolutePath()
-							+ " file Not found. \n Please create WebDriverConfig.properties as src/test/resources/properties/framework location and provide configuration properly.");
-					logger.error("!!!!!  " + file.getAbsolutePath()
-							+ " file Not found. \n Please create WebDriverConfig.properties as src/test/resources/properties/framework location and provide configuration properly.");
+							+ " file Not found. \n Please create Environment.properties file if you want to configure exeuction environment at location => src/test/resources/properties/framework/userDefined.");
 					e.printStackTrace();
 					// System.exit(-1);
 				} catch (IOException e) {
-					logger.error("Error while loading property " + file.getAbsolutePath()
-							+ " file. \n Please check content of property file and try again.");
 					logger.error("Error while loading property " + file.getAbsolutePath()
 							+ " file. \n Please check content of property file and try again.");
 					e.printStackTrace();
