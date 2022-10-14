@@ -1,5 +1,5 @@
 package org.iqa.suite.commons.applitool;
-
+import org.iqa.suite.commons.TestMetaData;
 import org.iqa.suite.commons.PropertyHolder;
 import org.iqa.test.webdriver_factory.WebDriverFactory;
 import org.slf4j.Logger;
@@ -46,16 +46,16 @@ public class ApplitoolsEyesUtils {
 		}
 	}
 
-	public static void openApplitoolEye(FeatureWrapper featureWrapper, PickleWrapper pickleWrapper) {
+	public static void openApplitoolEye() {
 		if ((ApplitoolEyesWeb.enabled == true || ApplitoolEyesMobile.enabled) == true) {
 			if (platform.equalsIgnoreCase("LINUX") || platform.equalsIgnoreCase("WINDOWS")) {
-				ApplitoolEyesWeb.createEyes().open(WebDriverFactory.getDriver(), featureWrapper.toString(),
-						pickleWrapper.toString() + ":" + PropertyHolder.testSuiteConfigurationProperties
+				ApplitoolEyesWeb.createEyes().open(WebDriverFactory.getDriver(), TestMetaData.getFeatureWrapper().toString(),
+						TestMetaData.getPickleWrapper.toString() + ":" + PropertyHolder.testSuiteConfigurationProperties
 								.getProperty("platform").toLowerCase());// ,new RectangleSize(1024, 751));
 
 			} else if (platform.equalsIgnoreCase("ANDROID") || platform.equalsIgnoreCase("IOS")) {
-				ApplitoolEyesMobile.createEyes().open(WebDriverFactory.getDriver(), featureWrapper.toString(),
-						pickleWrapper.toString() + ":" + PropertyHolder.testSuiteConfigurationProperties
+				ApplitoolEyesMobile.createEyes().open(WebDriverFactory.getDriver(), TestMetaData.getFeatureWrapper().toString(),
+						TestMetaData.getPickleWrapper.toString() + ":" + PropertyHolder.testSuiteConfigurationProperties
 								.getProperty("platform").toLowerCase());// ,new RectangleSize(1024, 751));
 			}
 		}
