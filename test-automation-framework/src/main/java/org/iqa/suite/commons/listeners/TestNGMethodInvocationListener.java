@@ -2,6 +2,7 @@ package org.iqa.suite.commons.listeners;
 
 import java.net.MalformedURLException;
 import java.util.HashMap;
+
 import org.iqa.suite.commons.AssertionFactory;
 import org.iqa.suite.commons.PropertyHolder;
 import org.iqa.suite.commons.SeleniumUtils;
@@ -16,6 +17,7 @@ import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestResult;
 import org.testng.asserts.SoftAssert;
+
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter;
@@ -37,7 +39,6 @@ public class TestNGMethodInvocationListener implements IInvokedMethodListener {
 				try {
 					WebDriverFactory.setDriver(WebDriverManager.CreateInstance());
 					WebDriverFactory.getDriver().manage().window().maximize();
-					ApplitoolsEyesUtils.openApplitoolEye();
 					logger.info("******** Driver object and test report instance created successfully");
 				} catch (MalformedURLException e) {
 					logger.error("!!!!!!!! Exception while creating Driver object and test report instance ");
@@ -48,7 +49,6 @@ public class TestNGMethodInvocationListener implements IInvokedMethodListener {
 			case "MOBILE":
 				try {
 					WebDriverFactory.setDriver(WebDriverManager.CreateInstance());
-					ApplitoolsEyesUtils.openApplitoolEye();
 				} catch (MalformedURLException e) {
 					logger.error(
 							"!!!!!!!! Exception occured while creating AppiumDriver object and test report instance");

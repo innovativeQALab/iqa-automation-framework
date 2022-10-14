@@ -5,9 +5,6 @@ import org.iqa.suite.commons.ExtentLogger;
 import org.json.JSONObject;
 import org.testng.Assert;
 
-import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter;
-
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
