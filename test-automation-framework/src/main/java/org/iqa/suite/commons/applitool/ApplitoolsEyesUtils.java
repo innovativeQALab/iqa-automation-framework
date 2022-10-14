@@ -50,12 +50,12 @@ public class ApplitoolsEyesUtils {
 		if ((ApplitoolEyesWeb.enabled == true || ApplitoolEyesMobile.enabled) == true) {
 			if (platform.equalsIgnoreCase("LINUX") || platform.equalsIgnoreCase("WINDOWS")) {
 				ApplitoolEyesWeb.createEyes().open(WebDriverFactory.getDriver(), TestMetaData.getFeatureWrapper().toString(),
-						TestMetaData.getPickleWrapper.toString() + ":" + PropertyHolder.testSuiteConfigurationProperties
+						TestMetaData.getPickleWrapper().toString() + ":" + PropertyHolder.testSuiteConfigurationProperties
 								.getProperty("platform").toLowerCase());// ,new RectangleSize(1024, 751));
 
 			} else if (platform.equalsIgnoreCase("ANDROID") || platform.equalsIgnoreCase("IOS")) {
 				ApplitoolEyesMobile.createEyes().open(WebDriverFactory.getDriver(), TestMetaData.getFeatureWrapper().toString(),
-						TestMetaData.getPickleWrapper.toString() + ":" + PropertyHolder.testSuiteConfigurationProperties
+						TestMetaData.getPickleWrapper().toString() + ":" + PropertyHolder.testSuiteConfigurationProperties
 								.getProperty("platform").toLowerCase());// ,new RectangleSize(1024, 751));
 			}
 		}
