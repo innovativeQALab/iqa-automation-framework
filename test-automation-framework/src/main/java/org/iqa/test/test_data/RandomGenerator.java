@@ -1,8 +1,8 @@
 package org.iqa.test.test_data;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.apache.commons.lang3.RandomStringUtils;
 
 public class RandomGenerator {
 

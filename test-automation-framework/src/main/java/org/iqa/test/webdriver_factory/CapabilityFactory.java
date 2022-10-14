@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+
 import org.iqa.suite.commons.PropertyHolder;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.slf4j.Logger;

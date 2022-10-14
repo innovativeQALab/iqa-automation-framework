@@ -3,6 +3,7 @@ package org.iqa.test.base;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
+
 import org.iqa.suite.commons.ExtentLogger;
 import org.iqa.suite.commons.applitool.ApplitoolEyesWeb;
 import org.iqa.test.test_data.RuntimeTestDataHolder;
@@ -17,6 +18,7 @@ import org.openqa.selenium.support.ui.Wait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.TestException;
+
 import com.applitools.eyes.selenium.Eyes;
 
 public class BasePageBrowser {

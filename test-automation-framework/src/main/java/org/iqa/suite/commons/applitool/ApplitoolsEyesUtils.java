@@ -1,9 +1,10 @@
 package org.iqa.suite.commons.applitool;
-
 import org.iqa.suite.commons.PropertyHolder;
+import org.iqa.suite.commons.TestMetaData;
 import org.iqa.test.webdriver_factory.WebDriverFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import com.applitools.eyes.TestResultsSummary;
 
 public class ApplitoolsEyesUtils {
@@ -46,21 +47,14 @@ public class ApplitoolsEyesUtils {
 	public static void openApplitoolEye() {
 		if ((ApplitoolEyesWeb.enabled == true || ApplitoolEyesMobile.enabled) == true) {
 			if (platform.equalsIgnoreCase("LINUX") || platform.equalsIgnoreCase("WINDOWS")) {
-//				ApplitoolEyesWeb.createEyes().open(WebDriverFactory.getDriver(), featureWrapper.toString(),
-//						pickleWrapper.toString() + ":"
-//								+ PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toLowerCase());//,new RectangleSize(1024, 751));
-
-				ApplitoolEyesWeb.createEyes().open(WebDriverFactory.getDriver());
-//				ApplitoolEyesWeb.createEyes().open(WebDriverFactory.getDriver(), appName,
-//						testName + ":" + platform.toLowerCase());// ,new RectangleSize(1024, 751));
+				ApplitoolEyesWeb.createEyes().open(WebDriverFactory.getDriver(), TestMetaData.getFeatureWrapper().toString(),
+						TestMetaData.getPickleWrapper().toString() + ":" + PropertyHolder.testSuiteConfigurationProperties
+								.getProperty("platform").toLowerCase());// ,new RectangleSize(1024, 751));
 
 			} else if (platform.equalsIgnoreCase("ANDROID") || platform.equalsIgnoreCase("IOS")) {
-//				ApplitoolEyeMobile.createEyes().open(WebDriverFactory.getDriver(), featureWrapper.toString(),
-//				pickleWrapper.toString() + ":"
-//						+ PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toLowerCase());//,new RectangleSize(1024, 751));
-				ApplitoolEyesWeb.createEyes().open(WebDriverFactory.getDriver());
-//				ApplitoolEyesMobile.createEyes().open(WebDriverFactory.getDriver(), appName,
-//						testName + ":" + platform.toLowerCase());// ,new RectangleSize(1024, 751));
+				ApplitoolEyesMobile.createEyes().open(WebDriverFactory.getDriver(), TestMetaData.getFeatureWrapper().toString(),
+						TestMetaData.getPickleWrapper().toString() + ":" + PropertyHolder.testSuiteConfigurationProperties
+								.getProperty("platform").toLowerCase());// ,new RectangleSize(1024, 751));
 			}
 		}
 
