@@ -2,6 +2,7 @@ package org.iqa.suite.commons.listeners;
 
 import java.net.MalformedURLException;
 import java.util.HashMap;
+
 import org.iqa.suite.commons.AssertionFactory;
 import org.iqa.suite.commons.PropertyHolder;
 import org.iqa.suite.commons.SeleniumUtils;
@@ -16,6 +17,7 @@ import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestResult;
 import org.testng.asserts.SoftAssert;
+
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter;

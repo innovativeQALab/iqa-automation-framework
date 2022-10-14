@@ -1,13 +1,11 @@
 package org.iqa.suite.commons.applitool;
-import org.iqa.suite.commons.TestMetaData;
 import org.iqa.suite.commons.PropertyHolder;
+import org.iqa.suite.commons.TestMetaData;
 import org.iqa.test.webdriver_factory.WebDriverFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.applitools.eyes.TestResultsSummary;
 
-import io.cucumber.testng.FeatureWrapper;
-import io.cucumber.testng.PickleWrapper;
+import com.applitools.eyes.TestResultsSummary;
 
 public class ApplitoolsEyesUtils {
 
