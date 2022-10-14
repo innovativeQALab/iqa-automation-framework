@@ -37,7 +37,6 @@ public class TestNGMethodInvocationListener implements IInvokedMethodListener {
 				try {
 					WebDriverFactory.setDriver(WebDriverManager.CreateInstance());
 					WebDriverFactory.getDriver().manage().window().maximize();
-					ApplitoolsEyesUtils.openApplitoolEye();
 					logger.info("******** Driver object and test report instance created successfully");
 				} catch (MalformedURLException e) {
 					logger.error("!!!!!!!! Exception while creating Driver object and test report instance ");
@@ -48,7 +47,6 @@ public class TestNGMethodInvocationListener implements IInvokedMethodListener {
 			case "MOBILE":
 				try {
 					WebDriverFactory.setDriver(WebDriverManager.CreateInstance());
-					ApplitoolsEyesUtils.openApplitoolEye();
 				} catch (MalformedURLException e) {
 					logger.error(
 							"!!!!!!!! Exception occured while creating AppiumDriver object and test report instance");
