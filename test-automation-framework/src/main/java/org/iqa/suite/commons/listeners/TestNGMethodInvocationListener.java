@@ -68,7 +68,7 @@ public class TestNGMethodInvocationListener implements IInvokedMethodListener {
 			logger.info("********RuntimeTestDataHolder initialized.");
 			TestMetaData.initialize();
 			logger.info("********TestMetaData initialized.");
-			
+
 		}
 	}
 
@@ -82,13 +82,13 @@ public class TestNGMethodInvocationListener implements IInvokedMethodListener {
 						ExtentCucumberAdapter.getCurrentStep().log(Status.FAIL, MediaEntityBuilder
 								.createScreenCaptureFromBase64String(SeleniumUtils.getScreenshotAsBase64()).build());
 						logger.debug("******** Screenshot attached to extent report");
-						WebDriverFactory.getDriver().quit();
 						ApplitoolsEyesUtils.closeApplitoolEye();
 					}
+					WebDriverFactory.getDriver().quit();
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-			}		
+			}
 		}
 	}
 }
