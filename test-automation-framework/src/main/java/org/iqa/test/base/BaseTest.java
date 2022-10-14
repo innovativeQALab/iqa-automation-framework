@@ -51,7 +51,7 @@ public class BaseTest extends AbstractTestNGCucumberTests {
 	public void runScenario(PickleWrapper pickleWrapper, FeatureWrapper featureWrapper) {
 		TestMetaData.setFeatureWrapper(featureWrapper);
 		TestMetaData.setPickleWrapper(pickleWrapper);
-		ApplitoolsEyesUtils.openApplitoolEye(TestMetaData.getFeatureWrapper(), TestMetaData.getPickleWrapper());
+		ApplitoolsEyesUtils.openApplitoolEye();
 		super.runScenario(pickleWrapper, featureWrapper);
 	}
 
