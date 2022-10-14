@@ -7,16 +7,13 @@ import org.iqa.suite.commons.ExtentLogger;
 import org.iqa.suite.commons.applitool.ApplitoolEyesWeb;
 import org.iqa.test.test_data.RuntimeTestDataHolder;
 import org.iqa.test.webdriver_factory.WebDriverFactory;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.TestException;
 import org.testng.asserts.SoftAssert;
 import com.applitools.eyes.selenium.Eyes;
 import io.appium.java_client.AppiumDriver;
@@ -37,17 +34,10 @@ public class BasePageMobile {
 
 	@SuppressWarnings("rawtypes")
 	public BasePageMobile() {
-		try {
-			driver = (AppiumDriver) WebDriverFactory.getDriver();
-			fluentwait = getFluentWaitTimeout();
-			PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-			runTimeTestData = RuntimeTestDataHolder.getRunTimeTestData();
-		} catch (Exception e) {
-			logger.error(
-					"!!!!!!!!!ERROR AppiumDriver driver found as NULL. Please check if AUT property is correctly set as AUT=MOBILE in Environment.properties file. Exiting...");
-			System.exit(-1);
-		}
-
+		driver = (AppiumDriver) WebDriverFactory.getDriver();
+		fluentwait = getFluentWaitTimeout();
+		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+		runTimeTestData = RuntimeTestDataHolder.getRunTimeTestData();
 	}
 
 	/**
@@ -58,7 +48,7 @@ public class BasePageMobile {
 
 	@SuppressWarnings("rawtypes")
 	protected Wait<AppiumDriver> getFluentWaitTimeout() {
-		return new FluentWait<AppiumDriver>((AppiumDriver) driver) .withTimeout(Duration.ofSeconds(DEFAULT_WAIT_TIMEOUT))
+		return new FluentWait<AppiumDriver>((AppiumDriver) driver).withTimeout(Duration.ofSeconds(DEFAULT_WAIT_TIMEOUT))
 				.pollingEvery(Duration.ofSeconds(1)).ignoring(NoSuchElementException.class);
 	}
 
@@ -88,6 +78,5 @@ public class BasePageMobile {
 		}
 		runTimeTestData.put(key, value);
 	}
-	
 
 }

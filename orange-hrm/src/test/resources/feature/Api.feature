@@ -1,6 +1,6 @@
 Feature: API Test
 
-@SmokeTest @GET @RUN
+@Api @SmokeTest @GET
 Scenario Outline: To verify user is able to execute HTTP POST call for given API
 	Given Test case id is "TC_ID_01"
 	And base URI is "https://reqres.in/"
@@ -13,7 +13,7 @@ Scenario Outline: To verify user is able to execute HTTP POST call for given API
 	||
 	
 	
-	@SmokeTest @POST @RUN
+	@Api @SmokeTest @POST
 
 Scenario Outline: To verify user is able to execute HTTP POST call for given API
 	Given Test case id is "TC_ID_01"

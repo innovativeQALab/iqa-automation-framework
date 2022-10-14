@@ -13,16 +13,16 @@ public class CustomProperties extends Properties {
 	@Override
 	public String getProperty(String key) {
 		if (null != System.getenv(key)) {
-			logger.info("Property '" + key + "' fetched from System environment variable");
+			logger.debug("Property '" + key + "' fetched from System environment variable");
 			return System.getenv(key);
 		} else if (null != System.getProperty(key)) {
-			logger.info("Property '" + key + "' fetched from System environment variable");
+			logger.debug("Property '" + key + "' fetched from System environment variable");
 			return System.getProperty(key);
 		} else if (null != super.getProperty(key)) {
-			logger.info("Property '" + key + "' fetched from System environment variable");
+			logger.debug("Property '" + key + "' fetched from System environment variable");
 			return super.getProperty(key);
 		} else {
-			logger.error("!!!!!!!!!ERROR Failed to fetch property '" + key + "' Please verify property is defined");
+			logger.debug("!!!!!!!!!ERROR Failed to fetch property '" + key + "' Please verify property is defined");
 			return null;
 		}
 	}

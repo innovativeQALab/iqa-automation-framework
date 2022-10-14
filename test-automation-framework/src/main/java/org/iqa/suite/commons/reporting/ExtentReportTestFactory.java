@@ -12,47 +12,64 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 
-
 public class ExtentReportTestFactory {
-	private static ExtentReports extentReport;
+	private static ExtentReports extentReport = new ExtentReports();
+	private static ExtentSparkReporter spark;
 	private static ThreadLocal<ExtentTest> extentTest = new ThreadLocal<ExtentTest>();
-	
+
 	private static Map<String, ExtentTest> moduleMap = new HashMap<String, ExtentTest>();
-    private static final Logger logger = LoggerFactory.getLogger(ExtentReportTestFactory.class);
+	private static final Logger logger = LoggerFactory.getLogger(ExtentReportTestFactory.class);
+
+//	static {
+//		ExtentSparkReporter htmlReporter = new ExtentSparkReporter("extent.html");
+//		htmlReporter.config().setTheme(Theme.STANDARD);
+//		htmlReporter.config().setDocumentTitle("Test Result");
+//		htmlReporter.config().setEncoding("utf-8");
+//		htmlReporter.config().setReportName("Test Results");
+//		extentReport = new ExtentReports();
+//		extentReport.attachReporter(htmlReporter);
+//				
+//	}
 
 	static {
-		ExtentSparkReporter htmlReporter = new ExtentSparkReporter("extent.html");
-		htmlReporter.config().setTheme(Theme.STANDARD);
-		htmlReporter.config().setDocumentTitle("Test Result");
-		htmlReporter.config().setEncoding("utf-8");
-		htmlReporter.config().setReportName("Test Results");
+		spark = new ExtentSparkReporter("./ExtentReportResults.html");
 		extentReport = new ExtentReports();
-		extentReport.attachReporter(htmlReporter);
-				
+		// spark.config().setTheme(Theme.DARK);
+		spark.config().setTheme(Theme.STANDARD);
+// Create extent report instance with spark reporter
+		extentReport.attachReporter(spark);
 	}
-	
-	synchronized public static ExtentTest getModule(String className)
-	{
-		if(!moduleMap.isEmpty() && moduleMap.containsKey(className))
-		{
+
+	synchronized public static ExtentTest getModule(String className) {
+		if (!moduleMap.isEmpty() && moduleMap.containsKey(className)) {
 			return moduleMap.get(className);
-		}else {
+		} else {
 			moduleMap.put(className, extentReport.createTest(className));
 			return moduleMap.get(className);
 		}
 	}
+
+//	synchronized public static void createNewTest(String moduleName,String testName)
+//	{
+//		ExtentReportTestFactory.extentTest.set(
+//				getModule(moduleName)
+//				.createNode(testName)
+//				);
+//	}
 	
-	
-	synchronized public static void createNewTest(String moduleName,String testName)
+	synchronized public static ExtentTest createNewTest(String featureName)
 	{
-		ExtentReportTestFactory.extentTest.set(
-				getModule(moduleName)
-				.createNode(testName)
-				);
+		ExtentReportTestFactory.extentTest.set(extentReport.createTest(featureName));
+		return extentTest.get();
+	}
+	
+	synchronized public static ExtentTest createNode(String testCaseName)
+	{
+		ExtentReportTestFactory.extentTest.get().createNode(testCaseName);
+		return extentTest.get();
 	}
 
-	synchronized public static void flushReport()
-	{
+	synchronized public static void flushReport() {
 		extentReport.flush();
 	}
 
@@ -60,10 +77,8 @@ public class ExtentReportTestFactory {
 		return extentTest.get();
 	}
 
-
 	synchronized public static void assignTestCategories(List<String> tags) {
-		for(String category:tags)
-		{
+		for (String category : tags) {
 			getTest().assignCategory(category);
 		}
 	}

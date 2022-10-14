@@ -1,26 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Selenium-Cucumber-Test" parallel="methods" data-provider-thread-count="10" >
-
-<!-- parameter name="featureFilePath" value="src/test/resources/feature/Login.feature"/ --> <!--  Mandatory : Run specific feature file -->
-<parameter name="featureFilePath" value="src/test/resources/feature/Api.feature"/> <!--  Mandatory : Folder of feature file -->
-<parameter name="glueCodePackageName" value="com.orangehrm.step_def.api"/> <!--  Mandatory : Folder of feature file -->
-
-<parameter name="tagsToExecute" value="@RUN"/>   
-<!-- Mandatory value can be {
-								<parameter name="tagsToExecute" value=""> //ignore tags
-								<parameter name="tagsToExecute" value="@High or @SanityTest">
-								<parameter name="tagsToExecute" value="@High and @SanityTest">
-								<parameter name="tagsToExecute" value="@High">
-							} 
--->
-
-  <test name="Test">
-    <classes>
-      <class name="org.iqa.test.runner.SequentialTestRunner"/>  <!--  Mandatory : Test Runner file
-      	For Sequential Run - user org.iqa.test.runner.SequentialTestRunner
-      	For Parallel Run org.iqa.test.runner.ParallelTestRunner
-       -->
-    </classes>
-  </test>
-</suite> 
+<suite name="Api-Cucumber-Test" parallel="methods" data-provider-thread-count="5" >
+	<parameter name="cucumber.filter.tags" value="@Api" /> 
+ 	<parameter name="cucumber.features" value="classpath:feature/Api.feature"/>	
+ 	<parameter name="cucumber.plugin" value="pretty, html:target/cucumber-reports/cucumber.html,com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"/>
+	<parameter name="cucumber.glue" value="com.orangehrm.step_def.api"/>
+    <test name="Test">  
+   		 <classes>
+     		 <class name="org.iqa.test.runner.ParallelTestRunner"/>  <!--  Mandatory : Test Runner file
+      			For Sequential Run - user org.iqa.test.runner.SequentialTestRunner
+      			For Parallel Run org.iqa.test.runner.ParallelTestRunner
+       		-->
+    	</classes>
+    </test>
+</suite>

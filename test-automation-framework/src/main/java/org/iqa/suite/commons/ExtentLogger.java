@@ -11,11 +11,11 @@ public class ExtentLogger {
 	}
 	
 	public void error(String message) {
-		ExtentReportTestFactory.getTest().error(message);
+		//ExtentReportTestFactory.getTest().error(message);
 	}
 	
 	public void error(Throwable thorowable) {
-		ExtentReportTestFactory.getTest().error(thorowable);
+		//ExtentReportTestFactory.getTest().error(thorowable);
 	}
 	
 	public void fail(String message) {

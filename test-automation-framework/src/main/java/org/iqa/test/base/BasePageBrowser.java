@@ -30,17 +30,10 @@ public class BasePageBrowser {
 	private static final int DEFAULT_WAIT_TIMEOUT = 30;
 
 	public BasePageBrowser() {
-		try {
-			driver = WebDriverFactory.getDriver();
-			fluentwait = getFluentWaitTimeout();
-			PageFactory.initElements(driver, this);
-			runTimeTestData = RuntimeTestDataHolder.getRunTimeTestData();
-		} catch (Exception e) {
-			logger.error(
-					"!!!!!!!!!ERROR WebDriver driver found as NULL. Please check if AUT property is correctly set as UI for Web Automation in properties. Exiting...");
-			System.exit(-1);
-		}
-
+		driver = WebDriverFactory.getDriver();
+		fluentwait = getFluentWaitTimeout();
+		PageFactory.initElements(driver, this);
+		runTimeTestData = RuntimeTestDataHolder.getRunTimeTestData();
 	}
 
 	/**

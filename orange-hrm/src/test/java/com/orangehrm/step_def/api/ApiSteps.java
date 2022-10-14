@@ -4,6 +4,10 @@ import org.iqa.suite.commons.ApiUtils;
 import org.iqa.suite.commons.ExtentLogger;
 import org.json.JSONObject;
 import org.testng.Assert;
+
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -20,34 +24,34 @@ public class ApiSteps extends ApiUtils {
 	@Given("Test case id is {string}")
 	public void test_case_id_is(String tc_id) {
 
-		extentLogger.info("*********INFO : Test case ID: " + tc_id);
+		//ExtentCucumberAdapter.getCurrentStep().log(Status.INFO,"********* Test case ID: " + tc_id);
 	}
 
 	@Given("base URI is {string}")
 	public void base_URI_is(String baseURI) {
 		setBaseURI(baseURI);
-		extentLogger.info("*********INFO : Base URI set as : " + baseURI);
+		//ExtentCucumberAdapter.getCurrentStep().log(Status.INFO,"Base URI set as : " + baseURI);
 	}
 
 	@Given("request query params are {string}")
 	public void request_query_params_are(String strQueryParams) {
 		String[] strQueryParamsArr = strQueryParams.split("=");
 		queryParams.put(strQueryParamsArr[0], strQueryParamsArr[1]);
-		extentLogger.info(
-				"*********INFO : Request query param added : " + strQueryParamsArr[0] + "=" + strQueryParamsArr[1]);
+//		extentLogger.info(
+//				"*********INFO : Request query param added : " + strQueryParamsArr[0] + "=" + strQueryParamsArr[1]);
 	}
 
 	@Given("request header key is {string} and value is {string}")
 	public void request_header_key_is_and_value_is(String headerKey, String headerValue) {
 		headerParams.put(headerKey, headerValue);
-		extentLogger.info("*********INFO : Request header key :" + headerKey + " and header value : " + headerValue);
+		//extentLogger.info("*********INFO : Request header key :" + headerKey + " and header value : " + headerValue);
 	}
 
 	@Given("request is {string}")
 	public void request_is(String request) {
 		request = "{\"name\": \"Prashant\",\"job\": \"Tester\"}";
 		strRequest.set(request);
-		extentLogger.info("*********INFO : Request body is : " + strRequest.get());
+		//extentLogger.info("*********INFO : Request body is : " + strRequest.get());
 	}
 
 	@When("user executes http {string} method with endpoint {string}")
@@ -58,7 +62,7 @@ public class ApiSteps extends ApiUtils {
 		} else if (method.equalsIgnoreCase("POST")) {
 			// response.set(httpPost(headerParams, queryParams, method, path));
 			response.set(httpPost(headerParams, strRequest.get(), path));
-			extentLogger.info("*********INFO : Post Http Method executed for endpoint- " + path);
+			//extentLogger.info("*********INFO : Post Http Method executed for endpoint- " + path);
 		}
 	}
 
@@ -67,10 +71,10 @@ public class ApiSteps extends ApiUtils {
 		Assert.assertEquals(getStatusCode(response.get()), expectedStatusCode, getBasePath());
 		int actualStatusCode = getStatusCode(response.get());
 		if (actualStatusCode == expectedStatusCode) {
-			extentLogger.info("*********INFO : Verified Response status code as expected - " + actualStatusCode);
+			//extentLogger.info("*********INFO : Verified Response status code as expected - " + actualStatusCode);
 		} else {
-			extentLogger.fail("*********ERROR : Status code mismatch!!! Expected : " + expectedStatusCode + " Actual: "
-					+ actualStatusCode);
+			//extentLogger.fail("*********ERROR : Status code mismatch!!! Expected : " + expectedStatusCode + " Actual: "
+					//+ actualStatusCode);
 			Assert.fail("Status code mismatch!!!");
 		}
 	}
