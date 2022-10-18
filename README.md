@@ -70,10 +70,6 @@ Configuration file are categorised in to three part
 
 3) Capabilities : This folder will contain Browser, iOS, Android etc specific properties in the separate files as per our need. Please refer to sample project 'orange-hrm' for more details.
 
-<parameter name="cucumber.filter.tags" value="@Web" /> 
- 	<parameter name="cucumber.features" value="classpath:feature"/>	
- 	<parameter name="cucumber.plugin" value="pretty, html:target/cucumber-reports/cucumber.html,com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"/>
-	<parameter name="cucumber.glue" value="com.orangehrm.step_def.web"/>
 
 ### XML file configurations
 TestNG xml file gives facility to execute test scripts as per our requirement. We need to provide the parameters which is mandatory for the execution of scripts and also as per our need
