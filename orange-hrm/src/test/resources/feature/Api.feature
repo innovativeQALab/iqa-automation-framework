@@ -7,10 +7,7 @@ Scenario Outline: To verify user is able to execute HTTP POST call for given API
 	And request query params are "page=2"
 	When user executes http "GET" method with endpoint "api/users"
 	Then user verifies status code as 200
-	
-	Examples:
-	||
-	||
+
 	
 	
 	@Api @SmokeTest @POST
@@ -21,10 +18,4 @@ Scenario Outline: To verify user is able to execute HTTP POST call for given API
 	And request header key is "content-type" and value is "application/json"
 	And request is ""
 	When user executes http "POST" method with endpoint "api/users"
-	Then user verifies status code as 201
-	#And user verifies response as ""
-	#And user verifies response value of node "" as ""
-	
-	Examples:
-	||
-	||
+	Then user verifies status code as 202
