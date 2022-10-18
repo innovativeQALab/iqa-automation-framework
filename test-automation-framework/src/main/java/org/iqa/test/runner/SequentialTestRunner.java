@@ -1,12 +1,11 @@
 package org.iqa.test.runner;
 
+import org.iqa.test.base.BaseTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.DataProvider;
 
-import io.cucumber.testng.AbstractTestNGCucumberTests;
-
-public class SequentialTestRunner extends AbstractTestNGCucumberTests {
+public class SequentialTestRunner extends BaseTest {
 	private static final Logger logger = LoggerFactory.getLogger(SequentialTestRunner.class);
 
 	@Override
