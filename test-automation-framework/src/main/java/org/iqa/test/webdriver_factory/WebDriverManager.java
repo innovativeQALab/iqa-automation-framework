@@ -2,7 +2,6 @@ package org.iqa.test.webdriver_factory;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-
 import org.iqa.suite.commons.PropertyHolder;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,7 +11,6 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 
@@ -21,6 +19,7 @@ public class WebDriverManager {
 
 	synchronized public static WebDriver CreateInstance() throws MalformedURLException {
 		WebDriver dr = null;
+		String platformOS = PropertyHolder.testSuiteConfigurationProperties.getProperty("platformOS").toString();
 		logger.info("********* Before Webdriver object creation");
 		try {
 			if (PropertyHolder.testSuiteConfigurationProperties.getProperty("DRIVER").toString().contains("BROWSER")) {
@@ -42,13 +41,11 @@ public class WebDriverManager {
 			} else if (PropertyHolder.testSuiteConfigurationProperties.getProperty("DRIVER").toString()
 					.contains("REMOTE")) {
 
-				if (PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString()
-						.equalsIgnoreCase("Android"))
+				if (platformOS.equals("ANDROID"))
 					dr = new AndroidDriver<WebElement>(
 							new URL(PropertyHolder.testSuiteConfigurationProperties.getProperty("hubUrl").toString()),
 							CapabilityFactory.getDesiredCapabilities());
-				else if (PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString()
-						.equalsIgnoreCase("iOS"))
+				else if (platformOS.equals("IOS"))
 					dr = new IOSDriver<WebElement>(
 							new URL(PropertyHolder.testSuiteConfigurationProperties.getProperty("hubUrl").toString()),
 							CapabilityFactory.getDesiredCapabilities());

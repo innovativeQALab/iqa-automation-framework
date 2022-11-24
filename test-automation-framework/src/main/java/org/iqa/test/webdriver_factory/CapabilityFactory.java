@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-
 import org.iqa.suite.commons.PropertyHolder;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.slf4j.Logger;
@@ -13,13 +12,12 @@ import org.slf4j.LoggerFactory;
 
 public class CapabilityFactory {
 	private static final Logger logger = LoggerFactory.getLogger(CapabilityFactory.class);
-
 	private static DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
 
 	static {
-		logger.debug("*********** Static block start. Platform - "
-				+ PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString());
-		switch (PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString()) {
+		String platformOS = PropertyHolder.testSuiteConfigurationProperties.getProperty("platformOS").toString();
+		logger.debug("*********** Static block start. Platform - " + platformOS);
+		switch (platformOS) {
 		case "ANDROID":
 			logger.debug("*********** ANDROIF IN");
 			fillCapabilities(getProperties("AndroidCapabilities.properties"));
@@ -36,7 +34,6 @@ public class CapabilityFactory {
 			logger.debug("*********** BROWSER OUT");
 			break;
 		}
-
 		logger.debug("*********** Static block end");
 	}
 
@@ -46,7 +43,7 @@ public class CapabilityFactory {
 			logger.error("!!!!!!!!!!!  Desired capability found null");
 		}
 		logger.info("********************************************************************");
-		logger.info("*********** DesiredCapabilities being set as:                      ");
+		logger.info("******************* DesiredCapabilities set as: ********************");
 		desiredCapabilities.asMap().forEach((key, value) -> logger.info(key + " - " + value));
 		logger.info("********************************************************************");
 		return desiredCapabilities;
