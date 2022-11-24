@@ -44,7 +44,7 @@ public class ApplitoolEyesWeb {
 		config.setApiKey(applitoolApiKey);
 		config.setBatch(
 				new BatchInfo(PropertyHolder.testSuiteConfigurationProperties.getProperty("BATCH_NAME").toString()));
-		config.setHostOS(PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString());
+		config.setHostOS(PropertyHolder.testSuiteConfigurationProperties.getProperty("platformOS").toString());
 	}
 
 	public static EyesRunner getApplitoolEyeRunner() {
