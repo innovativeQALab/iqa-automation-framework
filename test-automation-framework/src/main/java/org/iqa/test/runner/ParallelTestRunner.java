@@ -12,13 +12,9 @@ public class ParallelTestRunner extends BaseTest {
 	@Override
 	@DataProvider(parallel = true)
 	public Object[][] scenarios() {
-		Object[][] cucumberScenarios = null;
-		try {
-			cucumberScenarios = super.scenarios();
-		} catch (Exception e) {
-			logger.error("!!!!!!!!!!!!ERROR Please check feature file if there are any lexical errors!!!");
-		}
-		return cucumberScenarios;
+	
+		//Call to scenarios method of AbstractTestNGCucumberTests
+		return super.scenarios();
 	}
 
 }
