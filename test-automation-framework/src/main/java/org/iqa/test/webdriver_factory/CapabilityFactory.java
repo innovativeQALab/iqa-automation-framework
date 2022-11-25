@@ -82,21 +82,18 @@ public class CapabilityFactory {
 			System.exit(-1);
 		}
 		logger.debug("getProperties OUT - " + propertyFileName);
-		//Adding platform to testSuiteConfigurationProperties for further usage
-		loadPlatform(properties);
+		// Loading Capabilities properties into testSuiteConfigurationProperties for
+		// further usage
+		loadPropertiesIntoTestConfig(properties);
 		return properties;
 	}
 
-	private static void loadPlatform(Properties properties) {
+	private static void loadPropertiesIntoTestConfig(Properties properties) {
 
-		if (null != properties.get("platform")) {
-			PropertyHolder.testSuiteConfigurationProperties.put("platform",
-					null != PropertyHolder.testSuiteConfigurationProperties.getProperty("platform")
-							? PropertyHolder.testSuiteConfigurationProperties.getProperty("platform")
-							: properties.get("platform"));
-		}else {
-			logger.error("!!!platform property value found null. Please add platform capability.");
-		}
+		properties.forEach((k, v) -> PropertyHolder.testSuiteConfigurationProperties.put(k.toString(),
+				null != PropertyHolder.testSuiteConfigurationProperties.getProperty(k.toString())
+						? PropertyHolder.testSuiteConfigurationProperties.getProperty(k.toString())
+						: v.toString()));
 	}
 
 }
