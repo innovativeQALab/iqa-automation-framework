@@ -1,6 +1,7 @@
 package org.iqa.test.base;
 
 import org.iqa.suite.commons.PropertyHolder;
+import org.iqa.suite.commons.SeleniumUtils;
 import org.iqa.suite.commons.TestMetaData;
 import org.iqa.suite.commons.applitool.ApplitoolsEyesUtils;
 import org.iqa.suite.commons.listeners.TestNGMethodInvocationListener;
@@ -34,8 +35,8 @@ public class BaseTest extends AbstractTestNGCucumberTests {
 		if (null == AUT) {
 			logger.error(
 					"!!!!!!!!!! AUT Property must be set in src/test/resources/properties/framework/FrameworkConfig.properties"
-							+ "\n Property name should be AUT and values should be one of {WEB, MOBILE, API_ONLY.}"
-							+ "\n AUT should be set as WEB and MOBILE if you want to execute Web/Mobile automation tests and it also allows execution of API tests."
+							+ "\n Property name should be AUT and values should be one of {WEB, ANDROID,IOS, API_ONLY.}"
+							+ "\n AUT should be set as WEB/ANDROID/IOS if you want to execute Web/Mobile automation tests and it also allows execution of API tests."
 							+ "\n AUT should be set as API_ONLY if you want to execute only API tests}. Exiting...");
 			System.exit(-1);
 		}
@@ -43,6 +44,7 @@ public class BaseTest extends AbstractTestNGCucumberTests {
 		if (!AUT.equalsIgnoreCase("API_ONLY")) {
 			logger.info("********* Setting applitool eyes configs...");
 			ApplitoolsEyesUtils.setApplitoolEyeConfig();
+			logger.info("********* Applitools eyes configs set up done.");
 
 		}
 	}
@@ -60,23 +62,12 @@ public class BaseTest extends AbstractTestNGCucumberTests {
 		if (null != AUT && !AUT.equalsIgnoreCase("API_ONLY")) {
 			if (null != PropertyHolder.testSuiteConfigurationProperties.getProperty("EYE_ENABLE") && new Boolean(
 					PropertyHolder.testSuiteConfigurationProperties.getProperty("EYE_ENABLE").toString()) == true) {
-				if (PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString()
-						.equalsIgnoreCase("LINUX")) {
+				String platform = SeleniumUtils.getOsFamilyName(PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString());
+				if (platform.equalsIgnoreCase("LINUX")) {
 					ApplitoolsEyesUtils.applicationToolEyeWebGetAllTestResults(); // Only for Web
 				}
 			}
 		}
 
 	}
-
-	public Object[][] scenarios() {
-		Object[][] cucumberScenarios = null;
-		try {
-			cucumberScenarios = super.scenarios();
-		} catch (Exception e) {
-			logger.error("!!!!!!!!!!!!ERROR Please check feature file if there are any lexical errors!!!");
-		}
-		return cucumberScenarios;
-	}
-
 }
