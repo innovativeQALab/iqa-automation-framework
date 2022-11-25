@@ -46,7 +46,7 @@ public class ApplitoolsEyesUtils {
 	public static void openApplitoolEye() {
 		if ((ApplitoolEyesWeb.enabled == true || ApplitoolEyesMobile.enabled) == true) {
 			String platform = SeleniumUtils.getOsFamilyName(PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString());
-			if (platform.equalsIgnoreCase("LINUX") || platform.equalsIgnoreCase("WINDOWS")) {
+			if (platform.equalsIgnoreCase("LINUX") || platform.equalsIgnoreCase("WINDOWS") || platform.equalsIgnoreCase("MAC")) {
 				ApplitoolEyesWeb.createEyes().open(WebDriverFactory.getDriver(),
 						TestMetaData.getFeatureWrapper().toString(),
 						TestMetaData.getPickleWrapper().toString() + ":"
