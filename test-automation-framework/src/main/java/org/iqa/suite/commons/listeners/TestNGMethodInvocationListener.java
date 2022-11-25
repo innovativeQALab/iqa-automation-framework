@@ -41,12 +41,12 @@ public class TestNGMethodInvocationListener implements IInvokedMethodListener {
 					WebDriverFactory.getDriver().manage().window().maximize();
 					logger.info("******** Driver object and test report instance created successfully");
 				} catch (MalformedURLException e) {
-					logger.error("!!!!!!!! Exception while creating Driver object and test report instance ");
 					logger.error("!!!!!!!! Exception occured while creating Driver object and test report instance ");
 					e.printStackTrace();
 				}
 				break;
-			case "MOBILE":
+			case "ANDROID":
+			case "IOS":
 				try {
 					WebDriverFactory.setDriver(WebDriverManager.CreateInstance());
 				} catch (MalformedURLException e) {
@@ -59,7 +59,7 @@ public class TestNGMethodInvocationListener implements IInvokedMethodListener {
 				break;
 
 			default:
-				logger.error("!!!!!!!! AUT property should have values from [WEB/MOBILE/API_ONLY]. Exiting...");
+				logger.error("!!!!!!!! AUT property should have values from [WEB/ANDROID/IOS/API_ONLY]. Exiting...");
 				break;
 			}
 			softAssert = new SoftAssert();
