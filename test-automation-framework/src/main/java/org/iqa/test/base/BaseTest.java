@@ -59,15 +59,17 @@ public class BaseTest extends AbstractTestNGCucumberTests {
 
 	@AfterSuite
 	public void afterSuite() {
-		if (null != AUT && !AUT.equalsIgnoreCase("API_ONLY")) {
-			if (null != PropertyHolder.testSuiteConfigurationProperties.getProperty("EYE_ENABLE") && new Boolean(
-					PropertyHolder.testSuiteConfigurationProperties.getProperty("EYE_ENABLE").toString()) == true) {
-				String platform = SeleniumUtils.getOsFamilyName(PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString());
-				if (platform.equalsIgnoreCase("LINUX")) {
-					ApplitoolsEyesUtils.applicationToolEyeWebGetAllTestResults(); // Only for Web
-				}
-			}
-		}
+//    ***** Skipping applicationToolEyeWebGetAllTestResults as it is taking longer time for processing and causing execution pipeline to wait
+//
+//		if (null != AUT && !AUT.equalsIgnoreCase("API_ONLY")) {
+//			if (null != PropertyHolder.testSuiteConfigurationProperties.getProperty("EYE_ENABLE") && new Boolean(
+//					PropertyHolder.testSuiteConfigurationProperties.getProperty("EYE_ENABLE").toString()) == true) {
+//				String platform = SeleniumUtils.getOsFamilyName(PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString());
+//				if (platform.equalsIgnoreCase("LINUX")) {
+//					ApplitoolsEyesUtils.applicationToolEyeWebGetAllTestResults(); // Only for Web
+//				}
+//			}
+//		}
 
 	}
 }
