@@ -15,11 +15,11 @@ public class CapabilityFactory {
 	private static DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
 
 	static {
-		String platformOS = PropertyHolder.testSuiteConfigurationProperties.getProperty("platformOS").toString();
-		logger.debug("*********** Static block start. Platform - " + platformOS);
-		switch (platformOS) {
+		String AUT = PropertyHolder.testSuiteConfigurationProperties.getProperty("AUT").toString();
+		logger.debug("*********** Static block start. AUT - " + AUT);
+		switch (AUT) {
 		case "ANDROID":
-			logger.debug("*********** ANDROIF IN");
+			logger.debug("*********** ANDROID IN");
 			fillCapabilities(getProperties("AndroidCapabilities.properties"));
 			logger.debug("*********** ANDROIF OUT");
 			break;
@@ -35,17 +35,17 @@ public class CapabilityFactory {
 			break;
 		}
 		logger.debug("*********** Static block end");
-	}
-
-	public static DesiredCapabilities getDesiredCapabilities() {
-
-		if (null == desiredCapabilities) {
-			logger.error("!!!!!!!!!!!  Desired capability found null");
-		}
 		logger.info("********************************************************************");
 		logger.info("******************* DesiredCapabilities set as: ********************");
 		desiredCapabilities.asMap().forEach((key, value) -> logger.info(key + " - " + value));
 		logger.info("********************************************************************");
+	}
+
+	public static DesiredCapabilities getDesiredCapabilities() {
+		
+		if (null == desiredCapabilities) {
+			logger.error("!!!!!!!!!!!  Desired capability found null");
+		}
 		return desiredCapabilities;
 	}
 
