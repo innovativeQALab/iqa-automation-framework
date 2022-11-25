@@ -42,7 +42,7 @@ public class CapabilityFactory {
 	}
 
 	public static DesiredCapabilities getDesiredCapabilities() {
-		
+
 		if (null == desiredCapabilities) {
 			logger.error("!!!!!!!!!!!  Desired capability found null");
 		}
@@ -82,7 +82,21 @@ public class CapabilityFactory {
 			System.exit(-1);
 		}
 		logger.debug("getProperties OUT - " + propertyFileName);
+		//Adding platform to testSuiteConfigurationProperties for further usage
+		loadPlatform(properties);
 		return properties;
+	}
+
+	private static void loadPlatform(Properties properties) {
+
+		if (null != properties.get("platform")) {
+			PropertyHolder.testSuiteConfigurationProperties.put("platform",
+					null != PropertyHolder.testSuiteConfigurationProperties.getProperty("platform")
+							? PropertyHolder.testSuiteConfigurationProperties.getProperty("platform")
+							: properties.get("platform"));
+		}else {
+			logger.error("!!!platform property value found null. Please add platform capability.");
+		}
 	}
 
 }
