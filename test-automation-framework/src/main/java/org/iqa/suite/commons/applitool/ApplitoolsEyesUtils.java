@@ -6,7 +6,6 @@ import org.iqa.suite.commons.TestMetaData;
 import org.iqa.test.webdriver_factory.WebDriverFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import com.applitools.eyes.TestResultsSummary;
 
 public class ApplitoolsEyesUtils {
@@ -25,7 +24,8 @@ public class ApplitoolsEyesUtils {
 	}
 
 	public static void setApplitoolEyeConfig() {
-		if (null != EYE_ENABLE && new Boolean(EYE_ENABLE) == true) {
+		
+		if (null != EYE_ENABLE && Boolean.parseBoolean(EYE_ENABLE) == true) {
 			if (AUT.equalsIgnoreCase("WEB")) {
 				logger.info("********* Opening Applitool Eyes for Web");
 				ApplitoolEyesWeb.enabled = true;

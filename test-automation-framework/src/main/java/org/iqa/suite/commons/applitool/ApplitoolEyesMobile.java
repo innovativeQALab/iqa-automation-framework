@@ -1,5 +1,6 @@
 package org.iqa.suite.commons.applitool;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Set;
 
 import org.iqa.suite.commons.PropertyHolder;
@@ -26,28 +27,26 @@ public class ApplitoolEyesMobile {
 		config = new Configuration();
 	}
 	
-	public static void setApplitoolCongfig(String applitoolApiKey)
-	{
-		
+	@SuppressWarnings("unchecked")
+	public static void setApplitoolCongfig(String applitoolApiKey) {
 		createApplitoolEyeConfig();
 		Reflections reflections;
-			reflections = new Reflections(PropertyHolder.testSuiteConfigurationProperties.getProperty("APPLITOOL_CONFIG_PACKAGE").toString());   
+		reflections = new Reflections(
+				PropertyHolder.testSuiteConfigurationProperties.getProperty("APPLITOOL_CONFIG_PACKAGE").toString());
 
-			Set<Class<? extends IConfigListner>> classes = reflections.getSubTypesOf(IConfigListner.class);
-				Object[] arr = classes.toArray();
-				try {
-					((Class<? extends IConfigListner>)arr[0]).newInstance().getApplitoolConfig(config);
-				} catch (InstantiationException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+		Set<Class<? extends IConfigListner>> classes = reflections.getSubTypesOf(IConfigListner.class);
+		Object[] arr = classes.toArray();
+		try {
+			((Class<? extends IConfigListner>) arr[0]).getDeclaredConstructor().newInstance()
+					.getApplitoolConfig(config);
+		} catch (InvocationTargetException | NoSuchMethodException | InstantiationException
+				| IllegalAccessException e) {
+			e.printStackTrace();
+		}
 		config.setApiKey(applitoolApiKey);
 		config.setStitchMode(StitchMode.CSS);
-		config.setBatch(new BatchInfo(PropertyHolder.testSuiteConfigurationProperties.getProperty("BATCH_NAME").toString()));
-
+		config.setBatch(
+				new BatchInfo(PropertyHolder.testSuiteConfigurationProperties.getProperty("BATCH_NAME").toString()));
 	}
 
 	public static Eyes getEyes() {

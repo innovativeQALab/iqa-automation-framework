@@ -1,5 +1,6 @@
 package org.iqa.suite.commons.applitool;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Set;
 
 import org.iqa.suite.commons.PropertyHolder;
@@ -35,16 +36,16 @@ public class ApplitoolEyesWeb {
 		Set<Class<? extends IConfigListner>> classes = reflections.getSubTypesOf(IConfigListner.class);
 		Object[] arr = classes.toArray();
 		try {
-			((Class<? extends IConfigListner>) arr[0]).newInstance().getApplitoolConfig(config);
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
+			((Class<? extends IConfigListner>) arr[0]).getDeclaredConstructor().newInstance()
+					.getApplitoolConfig(config);
+		} catch (InvocationTargetException | NoSuchMethodException | InstantiationException
+				| IllegalAccessException e) {
 			e.printStackTrace();
 		}
 		config.setApiKey(applitoolApiKey);
 		config.setBatch(
 				new BatchInfo(PropertyHolder.testSuiteConfigurationProperties.getProperty("BATCH_NAME").toString()));
-		//config.setHostOS(PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString());
+		// config.setHostOS(PropertyHolder.testSuiteConfigurationProperties.getProperty("platform").toString());
 	}
 
 	public static EyesRunner getApplitoolEyeRunner() {

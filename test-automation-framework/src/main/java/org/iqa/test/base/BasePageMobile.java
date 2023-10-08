@@ -3,7 +3,6 @@ package org.iqa.test.base;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.iqa.suite.commons.ExtentLogger;
 import org.iqa.suite.commons.applitool.ApplitoolEyesWeb;
 import org.iqa.test.test_data.RuntimeTestDataHolder;
@@ -16,18 +15,14 @@ import org.openqa.selenium.support.ui.Wait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.asserts.SoftAssert;
-
 import com.applitools.eyes.selenium.Eyes;
-
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 
 public class BasePageMobile {
 
 	protected SoftAssert softAssert;
-	@SuppressWarnings("rawtypes")
 	protected Wait<AppiumDriver> fluentwait;
-	@SuppressWarnings("rawtypes")
 	protected AppiumDriver driver;
 	protected ExtentLogger extentLogger = new ExtentLogger();
 	protected static final Logger logger = LoggerFactory.getLogger(BasePageBrowser.class);
@@ -35,7 +30,6 @@ public class BasePageMobile {
 	protected Eyes eye = ApplitoolEyesWeb.getEyesForPageObject();
 	private Map<String, String> runTimeTestData = new HashMap<String, String>();
 
-	@SuppressWarnings("rawtypes")
 	public BasePageMobile() {
 		driver = (AppiumDriver) WebDriverFactory.getDriver();
 		fluentwait = getFluentWaitTimeout();
@@ -49,7 +43,6 @@ public class BasePageMobile {
 	 * @return Wait<WebDriver>
 	 */
 
-	@SuppressWarnings("rawtypes")
 	protected Wait<AppiumDriver> getFluentWaitTimeout() {
 		return new FluentWait<AppiumDriver>((AppiumDriver) driver).withTimeout(Duration.ofSeconds(DEFAULT_WAIT_TIMEOUT))
 				.pollingEvery(Duration.ofSeconds(1)).ignoring(NoSuchElementException.class);
