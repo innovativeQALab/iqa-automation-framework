@@ -1,7 +1,6 @@
 package org.iqa.test.base;
 
 import org.iqa.suite.commons.PropertyHolder;
-import org.iqa.suite.commons.SeleniumUtils;
 import org.iqa.suite.commons.TestMetaData;
 import org.iqa.suite.commons.applitool.ApplitoolsEyesUtils;
 import org.iqa.suite.commons.listeners.TestNGMethodInvocationListener;
@@ -11,7 +10,6 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.FeatureWrapper;
 import io.cucumber.testng.PickleWrapper;
