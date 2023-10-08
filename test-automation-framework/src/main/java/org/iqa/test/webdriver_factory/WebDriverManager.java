@@ -42,17 +42,17 @@ public class WebDriverManager {
 					.contains("REMOTE")) {
 				String AUT = PropertyHolder.testSuiteConfigurationProperties.getProperty("AUT").toString();
 				if (AUT.equals("ANDROID"))
-					dr = new AndroidDriver<WebElement>(
+					dr = new AndroidDriver(
 							new URL(PropertyHolder.testSuiteConfigurationProperties.getProperty("hubUrl").toString()),
-							CapabilityFactory.getDesiredCapabilities());
+							CapabilityFactory.getAndroidOptions());
 				else if (AUT.equals("IOS"))
-					dr = new IOSDriver<WebElement>(
+					dr = new IOSDriver(
 							new URL(PropertyHolder.testSuiteConfigurationProperties.getProperty("hubUrl").toString()),
-							CapabilityFactory.getDesiredCapabilities());
+							CapabilityFactory.getIOSOptions());
 				else
 					dr = new RemoteWebDriver(
 							new URL(PropertyHolder.testSuiteConfigurationProperties.getProperty("hubUrl").toString()),
-							CapabilityFactory.getDesiredCapabilities());
+							CapabilityFactory.getBrowserOptions());
 			} else {
 				logger.error("!!!!!!!!ERROR - Unable to create driver object");
 				System.exit(-1);
